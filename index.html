@@ -20,6 +20,7 @@
     <a href="#home" class="logo">AS<span>.</span></a>
     <nav class="nav-links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#artifact">Artifact 1</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#journey">Education</a>
@@ -46,7 +47,8 @@
           </p>
           <div class="cta">
             <a href="#projects" class="btn">View my work →</a>
-            <a href="https://www.linkedin.com/in/ashesh-shrestha-a662722b8/" class="btn btn-ghost" target="_blank" rel="noopener">Connect on LinkedIn</a>
+            <a href="resume.pdf" class="btn btn-ghost" download>Download résumé</a>
+            <a href="https://www.linkedin.com/in/ashesh-shrestha-a662722b8/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
           </div>
           <ul class="socials">
             <li><a href="https://github.com/amshrestha2020" target="_blank" rel="noopener">GitHub</a></li>
@@ -57,9 +59,10 @@
 
         <div class="hero-card reveal">
           <div class="avatar">
-            <!-- Add your photo: put photo.jpg in an assets/ folder, then replace the span with -->
-                 <img src="assets/photo.jpg" alt="Ashesh Shrestha" />
             <span>AS</span>
+            <!-- Photo: upload photo.jpg to the repo root (or assets/photo.jpg). If neither exists, the initials above show. -->
+            <img src="assets/photo.jpg" alt="Ashesh Shrestha"
+                 onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='photo.jpg';}else{this.remove();}" />
           </div>
           <h3>Ashesh Shrestha</h3>
           <p class="muted">Software Engineer · AI &amp; Data Analytics</p>
@@ -103,8 +106,54 @@
       </div>
     </section>
 
+    <!-- ARTIFACT 1 -->
+    <section class="section alt" id="artifact">
+      <div class="container">
+        <p class="eyebrow reveal">Portfolio Artifact 1</p>
+        <h2 class="reveal">AI &amp; ML Timeline: <span class="gradient-text">from Turing to generative AI</span></h2>
+        <p class="muted reveal">An interactive timeline of the milestones that shaped modern AI, written for people who hire and lead technical teams.</p>
+
+        <div class="meta-grid reveal">
+          <div><small>Audience</small><strong>Hiring managers, recruiters and engineering leads in tech and financial services</strong></div>
+          <div><small>Purpose</small><strong>Show I understand how the field evolved and where my engineering background fits</strong></div>
+          <div><small>Format</small><strong>Interactive timeline (filter by era)</strong></div>
+          <div><small>Source</small><strong>Workshop 1 · AI &amp; ML Timelines</strong></div>
+        </div>
+
+        <div class="filters reveal" role="tablist" aria-label="Filter timeline by era">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="foundations">Foundations</button>
+          <button class="filter" data-filter="ml">Machine Learning</button>
+          <button class="filter" data-filter="dl">Deep Learning</button>
+          <button class="filter" data-filter="genai">Generative AI</button>
+        </div>
+
+        <ol class="ai-timeline">
+          <li data-era="foundations"><time>1950</time><div><h4>Turing proposes the "imitation game"</h4><p>Alan Turing's paper <em>Computing Machinery and Intelligence</em> asks whether machines can think and introduces what became the Turing Test.</p></div></li>
+          <li data-era="foundations"><time>1956</time><div><h4>The Dartmouth workshop</h4><p>The term "artificial intelligence" is coined, and AI becomes a research field of its own.</p></div></li>
+          <li data-era="foundations"><time>1966</time><div><h4>ELIZA</h4><p>Joseph Weizenbaum's chatbot at MIT shows how simple pattern matching can feel like conversation.</p></div></li>
+          <li data-era="ml"><time>1986</time><div><h4>Backpropagation popularized</h4><p>Rumelhart, Hinton and Williams show how multi-layer neural networks can learn, a core technique still used today.</p></div></li>
+          <li data-era="ml"><time>1997</time><div><h4>Deep Blue beats Kasparov</h4><p>IBM's chess computer defeats the world champion, a landmark for machines in structured decision-making.</p></div></li>
+          <li data-era="dl"><time>2012</time><div><h4>AlexNet wins ImageNet</h4><p>A deep convolutional network trained on GPUs dramatically beats older methods, igniting the deep learning boom in computer vision.</p></div></li>
+          <li data-era="dl"><time>2016</time><div><h4>AlphaGo beats Lee Sedol</h4><p>DeepMind's system masters Go, combining deep neural networks with reinforcement learning.</p></div></li>
+          <li data-era="genai"><time>2017</time><div><h4>The Transformer</h4><p>The paper <em>Attention Is All You Need</em> introduces the architecture behind today's large language models.</p></div></li>
+          <li data-era="genai"><time>2022</time><div><h4>ChatGPT launches</h4><p>Generative AI reaches the general public, and companies of every size start asking how to use it responsibly.</p></div></li>
+          <li data-era="genai"><time>Today</time><div><h4>AI moves into everyday engineering</h4><p>Copilots, agents and multimodal models are entering enterprise software, alongside a growing focus on governance and responsible AI.</p></div></li>
+        </ol>
+
+        <div class="callout reveal">
+          <h4>Why this matters to you</h4>
+          <p>
+            Every shift on this timeline, from rules to learning to generative models, changed what engineers are
+            asked to build. I pair 5+ years of production backend and cloud experience in financial services with
+            graduate-level AI training, so I can help teams adopt AI in ways that are reliable, secure and explainable.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- SKILLS -->
-    <section class="section alt" id="skills">
+    <section class="section" id="skills">
       <div class="container">
         <p class="eyebrow reveal">Tech stack</p>
         <h2 class="reveal">Toolbox</h2>
@@ -130,7 +179,7 @@
     </section>
 
     <!-- PROJECTS -->
-    <section class="section" id="projects">
+    <section class="section alt" id="projects">
       <div class="container">
         <p class="eyebrow reveal">Selected work</p>
         <h2 class="reveal">Projects</h2>
@@ -188,7 +237,7 @@
     </section>
 
     <!-- EDUCATION -->
-    <section class="section alt" id="journey">
+    <section class="section" id="journey">
       <div class="container narrow">
         <p class="eyebrow reveal">Journey</p>
         <h2 class="reveal">Experience &amp; education</h2>
@@ -202,7 +251,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="section" id="contact">
+    <section class="section alt" id="contact">
       <div class="container">
         <div class="contact-card reveal">
           <h2>Let's build something great.</h2>
