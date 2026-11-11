@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="data:,">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ashesh Shrestha | Software Engineer & AI Practitioner</title>
   <meta name="description" content="Ashesh Shrestha: Software Engineer with 5+ years building microservices, backend systems and cloud infrastructure for financial services. MSc in AI and MSc in Computer Science." />
@@ -20,6 +21,8 @@
     <a href="#home" class="logo">AS<span>.</span></a>
     <nav class="nav-links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#artifact">Artifact 1</a>
+      <a href="#artifact2">Artifact 2</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#journey">Education</a>
@@ -46,7 +49,8 @@
           </p>
           <div class="cta">
             <a href="#projects" class="btn">View my work →</a>
-            <a href="https://www.linkedin.com/in/ashesh-shrestha-a662722b8/" class="btn btn-ghost" target="_blank" rel="noopener">Connect on LinkedIn</a>
+            <a href="resume.pdf" class="btn btn-ghost" download>Download résumé</a>
+            <a href="https://www.linkedin.com/in/ashesh-shrestha-a662722b8/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
           </div>
           <ul class="socials">
             <li><a href="https://github.com/amshrestha2020" target="_blank" rel="noopener">GitHub</a></li>
@@ -57,9 +61,10 @@
 
         <div class="hero-card reveal">
           <div class="avatar">
-            <!-- Add your photo: put photo.jpg in an assets/ folder, then replace the span with -->
-                 <img src="assets/photo.jpg" alt="Ashesh Shrestha" />
             <span>AS</span>
+            <!-- Photo: upload photo.jpg to the repo root (or assets/photo.jpg). If neither exists, the initials above show. -->
+            <img src="assets/photo.jpg" alt="Ashesh Shrestha"
+                 onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='photo.jpg';}else{this.remove();}" />
           </div>
           <h3>Ashesh Shrestha</h3>
           <p class="muted">Software Engineer · AI &amp; Data Analytics</p>
@@ -103,19 +108,237 @@
       </div>
     </section>
 
+    <!-- ARTIFACT 1 -->
+    <section class="section alt" id="artifact">
+      <div class="container">
+        <p class="eyebrow reveal">Portfolio Artifact 1</p>
+        <h2 class="reveal">Timeline of Artificial Intelligence: <span class="gradient-text">1950 to the 2024 Nobel Prizes</span></h2>
+        <p class="muted reveal">From the Turing Test to today's generative AI, including the two AI winters and the deep learning and cloud computing era. Filter by era below.</p>
+
+        <div class="meta-grid reveal">
+          <div><small>Audience</small><strong>Hiring managers, recruiters and engineering leads in tech and financial services</strong></div>
+          <div><small>Purpose</small><strong>Show I understand how AI evolved, why progress stalled twice, and where my engineering background fits</strong></div>
+          <div><small>Format</small><strong>Interactive timeline with era filters and cited sources</strong></div>
+          <div><small>Source</small><strong>Workshop 1 · AI &amp; ML Timelines · 15 references</strong></div>
+        </div>
+
+        <div class="filters reveal" role="group" aria-label="Filter timeline by era">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="golden">Golden years</button>
+          <button class="filter" data-filter="winters">AI winters</button>
+          <button class="filter" data-filter="revival">Revival</button>
+          <button class="filter" data-filter="deep">Deep learning &amp; cloud</button>
+        </div>
+
+        <ol class="ai-timeline">
+          <li data-era="golden"><time>1950</time><div><span class="era-tag">Golden years</span><h4>Turing asks if machines can think</h4><p>Alan Turing publishes "Computing Machinery and Intelligence" and proposes a text conversation test in which a judge cannot tell machine from human. It becomes the Turing Test.</p></div></li>
+          <li data-era="golden"><time>1956</time><div><span class="era-tag">Golden years</span><h4>Dartmouth workshop names the field</h4><p>A summer workshop at Dartmouth College brings researchers together, and John McCarthy introduces the term "artificial intelligence".</p></div></li>
+          <li data-era="golden"><time>1956</time><div><span class="era-tag">Golden years</span><h4>Logic Theorist and a checkers learner</h4><p>Newell and Simon build programs that prove logic theorems, and Arthur Samuel's checkers player learns well enough to beat its own developer.</p></div></li>
+          <li data-era="golden"><time>1957</time><div><span class="era-tag">Golden years</span><h4>The Mark I Perceptron</h4><p>Frank Rosenblatt demonstrates a single-layer neural network at Cornell that sorts input into two categories.</p></div></li>
+          <li data-era="golden"><time>1958</time><div><span class="era-tag">Golden years</span><h4>LISP</h4><p>McCarthy's LISP becomes the first programming language of AI research.</p></div></li>
+          <li data-era="golden"><time>1966</time><div><span class="era-tag">Golden years</span><h4>ELIZA, the first chatbot</h4><p>Joseph Weizenbaum's ELIZA at MIT holds scripted conversations and shows how readily people read understanding into text.</p></div></li>
+          <li data-era="golden"><time>1966</time><div><span class="era-tag">Golden years</span><h4>ALPAC report on translation</h4><p>A U.S. review finds machine translation more expensive, less accurate and slower than human translation, an early sign that promises were outrunning results.</p></div></li>
+          <li data-era="golden"><time>1969</time><div><span class="era-tag">Golden years</span><h4>Perceptrons exposes a limit</h4><p>Minsky and Papert show that basic perceptrons cannot handle problems like XOR, and neural network research loses support for years.</p></div></li>
+
+          <li data-era="winters"><time>1973</time><div><span class="era-tag winter">First AI winter</span><h4>The Lighthill report</h4><p>Sir James Lighthill reviews British AI research and finds it short of its goals. A BBC debate the same year contests his conclusions, but the funding consequences stand.</p></div></li>
+          <li data-era="winters"><time>1973–74</time><div><span class="era-tag winter">First AI winter</span><h4>DARPA pulls back</h4><p>U.S. defence funding for open-ended academic AI shrinks and shifts toward applied projects with measurable goals.</p></div></li>
+
+          <li data-era="revival"><time>1982</time><div><span class="era-tag revival">Expert systems boom</span><h4>Hopfield networks</h4><p>John Hopfield's network stores and recalls patterns using ideas borrowed from physics, bringing neural networks back into view.</p></div></li>
+          <li data-era="revival"><time>1986</time><div><span class="era-tag revival">Expert systems boom</span><h4>Backpropagation for hidden layers</h4><p>Rumelhart, Hinton and Williams popularize backpropagation, the training method behind later deep learning.</p></div></li>
+
+          <li data-era="winters"><time>1987</time><div><span class="era-tag winter">Second AI winter</span><h4>The LISP machine market collapses</h4><p>The billion-dollar AI hardware and software industry begins to fall apart as expert systems prove costly and brittle.</p></div></li>
+          <li data-era="winters"><time>1989</time><div><span class="era-tag winter">Second AI winter</span><h4>Backpropagation reads zip codes</h4><p>Yann LeCun applies backpropagation to recognizing handwritten zip codes, an early practical use of the convolutional approach.</p></div></li>
+
+          <li data-era="revival"><time>1997</time><div><span class="era-tag revival">Machine learning rebuilds</span><h4>Deep Blue beats Kasparov</h4><p>On May 11, IBM's Deep Blue wins a six-game match against world chess champion Garry Kasparov, 3.5 to 2.5, relying mainly on programmed chess knowledge and brute-force search.</p></div></li>
+          <li data-era="revival"><time>2000</time><div><span class="era-tag revival">Machine learning rebuilds</span><h4>Word embeddings</h4><p>Yoshua Bengio's neural probabilistic language model represents word meaning as dense vectors, a step toward modern language AI.</p></div></li>
+          <li data-era="revival"><time>2006</time><div><span class="era-tag revival">Machine learning rebuilds</span><h4>CUDA opens GPUs to general computing</h4><p>Nvidia ships the CUDA platform in November, and researchers find GPUs well suited to the matrix math inside neural networks.</p></div></li>
+          <li data-era="revival"><time>2011</time><div><span class="era-tag revival">Machine learning rebuilds</span><h4>Watson wins Jeopardy!</h4><p>IBM's Watson beats champions Ken Jennings and Brad Rutter and can parse natural-language questions.</p></div></li>
+
+          <li data-era="deep"><time>2012</time><div><span class="era-tag deep">Deep learning &amp; cloud</span><h4>AlexNet wins ImageNet</h4><p>A deep convolutional network trained on two Nvidia GPUs cuts top-5 error to 15.3%, against 26.2% for the runner-up. Deep learning becomes the default approach in vision.</p></div></li>
+          <li data-era="deep"><time>2016</time><div><span class="era-tag deep">Deep learning &amp; cloud</span><h4>AlphaGo defeats Lee Sedol</h4><p>DeepMind's AlphaGo beats the world Go champion by combining deep learning with reinforcement learning, trained in the cloud on Google's TPU chips.</p></div></li>
+          <li data-era="deep"><time>2017</time><div><span class="era-tag deep">Deep learning &amp; cloud</span><h4>The Transformer</h4><p>The paper "Attention Is All You Need" introduces the architecture behind today's large language models.</p></div></li>
+          <li data-era="deep"><time>2020</time><div><span class="era-tag deep">Deep learning &amp; cloud</span><h4>AlphaFold 2 and GPT-3</h4><p>AlphaFold 2 predicts protein structures accurately, and OpenAI's GPT-3 shows how far scale alone can carry a language model.</p></div></li>
+          <li data-era="deep"><time>2022</time><div><span class="era-tag deep">Deep learning &amp; cloud</span><h4>ChatGPT reaches everyone</h4><p>In November, OpenAI opens a free preview of ChatGPT, built on GPT-3.5, and generative AI becomes a mainstream tool within weeks.</p></div></li>
+          <li data-era="deep"><time>2024</time><div><span class="era-tag deep">Deep learning &amp; cloud</span><h4>Nobel Prizes recognize AI</h4><p>Hinton and Hopfield share the Physics prize for foundational work on artificial neural networks, and Hassabis and Jumper share half of the Chemistry prize for AlphaFold 2, with David Baker honored for protein design.</p></div></li>
+        </ol>
+
+        <h3 class="sub reveal">What caused the AI winters</h3>
+        <div class="winter-grid">
+          <article class="card reveal">
+            <h4>First AI winter (1974 – 1980)</h4>
+            <p><b>Causes:</b> The 1973 Lighthill report judged AI to have failed its big promises, DARPA cut general academic AI funding in 1973 and 1974, and machine translation and perceptron limits had already dented confidence.</p>
+            <p><b>Cost:</b> UK AI research was largely dismantled outside a few universities such as Edinburgh, Essex and Sussex, and DARPA redirected money to projects with specific, measurable goals. The pattern: pessimism among researchers, then in the press, then a funding cut.</p>
+          </article>
+          <article class="card reveal">
+            <h4>Second AI winter (1987 – 1993)</h4>
+            <p><b>Causes:</b> The LISP machine market collapsed in 1987, and hand-written rule bases proved brittle, with maintenance costs growing beyond the value they returned.</p>
+            <p><b>Cost:</b> Companies abandoned expert systems and funding and enthusiasm fell again, though some work continued underneath, including neural networks applied to real tasks. Dating varies by source.</p>
+          </article>
+        </div>
+
+        <div class="callout reveal">
+          <h4>Why this matters to you</h4>
+          <p>
+            The two winters show what happens when hype outruns measurable results, and the revival shows that
+            progress returns once data, hardware and methods catch up. As an engineer with 5+ years of production
+            backend and cloud experience in financial services and graduate-level AI training, I focus on building
+            AI-enabled systems that are reliable, secure, explainable and tied to measurable goals.
+          </p>
+        </div>
+
+        <details class="sources reveal">
+          <summary>Sources (15)</summary>
+          <ol>
+            <li><a href="https://arxiv.org/pdf/2109.01517" target="_blank" rel="noopener">A brief history of AI: how to prevent another winter (arXiv review)</a></li>
+            <li><a href="https://computerhistory.org/wp-content/uploads/2025/01/LLM-timeline.pdf" target="_blank" rel="noopener">Computer History Museum, LLM timeline</a></li>
+            <li><a href="https://datacamp.com/blog/ai-winter" target="_blank" rel="noopener">DataCamp, AI Winter: Understanding the Cycles of AI Development</a></li>
+            <li><a href="https://oreil.ly/nHtEz" target="_blank" rel="noopener">AI winter overview (Lighthill report, DARPA cuts, ALPAC)</a></li>
+            <li><a href="https://www.tech.gov.sg/technews/the-history-of-ai-part-1/" target="_blank" rel="noopener">Singapore GovTech, The History of AI, Part 1</a></li>
+            <li><a href="https://eweek.com/?p=233148" target="_blank" rel="noopener">eWeek, the story of AlexNet</a></li>
+            <li><a href="https://www.envisioning.com/vocab/alexnet" target="_blank" rel="noopener">Envisioning, AlexNet</a></li>
+            <li><a href="https://macropolo.org/digital-projects/supply-chain/ai-chips/ai-in-the-cloud/" target="_blank" rel="noopener">MacroPolo, AI in the Cloud (TPU and AlphaGo)</a></li>
+            <li><a href="https://www.jonpeddie.com/news/part-iii-the-evolution-to-ai-gpus/" target="_blank" rel="noopener">Jon Peddie Research, the evolution to AI GPUs (CUDA)</a></li>
+            <li><a href="https://analyticsindiamag.com/googles-ai-cloud-tpu-public-beta/" target="_blank" rel="noopener">Analytics India Magazine, Google's Cloud TPU public beta</a></li>
+            <li><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Vaswani et al., Attention Is All You Need (arXiv)</a></li>
+            <li><a href="https://www.iotworldtoday.com/iiot/25-years-ago-today-how-deep-blue-vs-kasparov-changed-ai-forever" target="_blank" rel="noopener">AI Business, 25 Years Ago: How Deep Blue vs. Kasparov Changed AI</a></li>
+            <li><a href="https://en.chessbase.com/newsroom/post/after-deep-blue-ibm-s-watson-defeats-jeopardy-champs?page=0" target="_blank" rel="noopener">ChessBase, After Deep Blue: IBM's Watson defeats Jeopardy champs</a></li>
+            <li><a href="https://cgi.luddy.indiana.edu/~yye/b565/annhistory.php" target="_blank" rel="noopener">Indiana University, History of deep learning</a></li>
+            <li><a href="https://aihub.org/2024/10/10/nobel-prizes-in-physics-and-chemistry-awarded-for-machine-learning-research" target="_blank" rel="noopener">AIhub, Nobel Prizes in physics and chemistry awarded for machine learning research</a></li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+
+    <!-- ARTIFACT 2 -->
+    <section class="section" id="artifact2">
+      <div class="container">
+        <p class="eyebrow reveal">Portfolio Artifact 2</p>
+        <h2 class="reveal">What I learned: <span class="gradient-text">AI concepts, change leadership and new tools</span></h2>
+        <p class="muted reveal">A learner's record of Workshop 2: the concepts I studied, the AI tools I tried, and an enterprise AI governance deck I built with them.</p>
+
+        <div class="meta-grid reveal">
+          <div><small>Audience</small><strong>Hiring managers, recruiters and engineering leads who want evidence I keep learning</strong></div>
+          <div><small>Purpose</small><strong>Show I can learn new AI concepts and tools quickly and apply them to a business problem</strong></div>
+          <div><small>Format</small><strong>Learning summary with tools used and a governance deck</strong></div>
+          <div><small>Source</small><strong>Workshop 2</strong></div>
+        </div>
+
+        <div class="learn-grid">
+          <article class="card reveal">
+            <div class="ico">🧠</div>
+            <h4>1. Machine learning vs. deep learning</h4>
+            <p>Machine learning learns patterns from data, often with features that people choose. Deep learning uses many-layered neural networks that learn those features themselves, which is why it excels on images, speech and language but needs more data and computing power.</p>
+          </article>
+          <article class="card reveal">
+            <div class="ico">🔄</div>
+            <h4>2. Adaptability and change leadership</h4>
+            <p>Adopting AI is a people change as much as a technical one. I learned to stay flexible as tools evolve, bring colleagues along with clear communication, and lead change by showing small, measurable wins first.</p>
+          </article>
+          <article class="card reveal">
+            <div class="ico">🛠️</div>
+            <h4>3. New AI tools I tried</h4>
+            <div class="chips">
+              <span>Consensus</span><span>NotebookLM</span><span>Flight simulator</span>
+            </div>
+            <p>I used Consensus to find research-backed answers, NotebookLM to work from my own source documents, and a flight simulator to practice using AI in a safe setting. I then built my own flight simulator, a helicopter rotor lab and a prompt simulator (below).</p>
+          </article>
+          <article class="card reveal">
+            <div class="ico">📊</div>
+            <h4>4. Enterprise AI governance framework</h4>
+            <p>I built a presentation on an enterprise AI governance framework, generating the deck with Gamma and using Claude to develop the content and the project page. Details below.</p>
+            <div class="stack"><span>Gamma</span><span>Claude</span><span>AI governance</span></div>
+          </article>
+        </div>
+
+        <article class="project featured reveal deck">
+          <span class="tag">Presentation · Team project · Built with Gamma &amp; Claude</span>
+          <h3>Enterprise AI Governance Framework</h3>
+          <p><b>Problem:</b> AI adoption is accelerating while ownership, risk reviews and control practices stay fragmented.<br />
+             <b>Approach:</b> With a teammate (Nalini Priya Uppari), I designed a risk-based operating model covering intake, assessment, approval, deployment and monitoring. I generated the deck with Gamma and used Claude to develop the content and the project page.<br />
+             <b>Outcome:</b> A practical framework for safe, trusted, compliant and scalable AI adoption, with accountable owners, evidence-based controls and measurable targets.</p>
+
+          <div class="glance">
+            <div><strong>6</strong><span>guiding principles</span><small>Accountability · Risk proportionality · Transparency · Security &amp; privacy · Human oversight · Continuous assurance</small></div>
+            <div><strong>7</strong><span>lifecycle gates</span><small>Intake · Triage · Assess · Build &amp; test · Approve · Monitor · Retire</small></div>
+            <div><strong>4</strong><span>risk tiers</span><small>Low · Medium · High · Prohibited, with review depth scaling by impact</small></div>
+            <div><strong>6</strong><span>control areas</span><small>Data · Model quality · Fairness · Security · Third-party · Human oversight</small></div>
+            <div><strong>6</strong><span>KPIs</span><small>Coverage · Approval discipline · Quality · Fairness · Security &amp; privacy · Operational health</small></div>
+            <div><strong>3</strong><span>roadmap phases</span><small>Discover &amp; design · Pilot controls · Operationalize</small></div>
+          </div>
+
+          <div class="stack"><span>AI governance</span><span>Risk tiering</span><span>Control plane</span><span>Responsible AI</span><span>Gamma</span><span>Claude</span></div>
+          <div class="links">
+            <a href="https://claude.ai/public/artifacts/126e60e9-66af-4503-a8c2-10101d8e1a7d" class="link" target="_blank" rel="noopener">View the framework project →</a>
+          </div>
+        </article>
+
+        <article class="project featured reveal sim">
+          <span class="tag">Interactive · Built for Artifact 2</span>
+          <h3>Flight Simulator</h3>
+          <p><b>Problem:</b> Flying is hard to picture from a textbook. Lift, drag, stalls and landings only make sense when you feel them.<br />
+             <b>Approach:</b> I built a simple 3D flight simulator that runs in the browser. You take off or land a small plane with real lift, drag, stall and ground effect, with a coach that explains what is happening.<br />
+             <b>Outcome:</b> A playable simulator with keyboard and touch controls, deployed on GitHub Pages. From inside it you can open the Helicopter Rotor Lab below.</p>
+          <div class="stack"><span>JavaScript</span><span>three.js</span><span>Physics</span><span>HTML/CSS</span><span>GitHub Pages</span></div>
+          <div class="links">
+            <button type="button" class="link link-btn embed-toggle" data-embed="simEmbed" aria-expanded="false" aria-controls="simEmbed">Play it here ▶</button>
+            <a href="flight-simulator/index.html" class="link" target="_blank" rel="noopener">Open full screen →</a>
+            <a href="https://github.com/amshrestha2020/portfolio/tree/main/flight-simulator" class="link" target="_blank" rel="noopener">View source →</a>
+          </div>
+        </article>
+        <div class="sim-embed" id="simEmbed" hidden>
+          <iframe title="Flight Simulator" loading="lazy" allow="fullscreen" data-src="flight-simulator/index.html"></iframe>
+        </div>
+
+        <article class="project featured reveal sim">
+          <span class="tag">Interactive · Opens from the flight simulator</span>
+          <h3>Helicopter Rotor Lab</h3>
+          <p><b>Problem:</b> It is hard to see how a helicopter blade pushes air, and what you give up when you change the design.<br />
+             <b>Approach:</b> Animated airflow through the rotor and over one blade. Change blade count, length, width, speed, pitch and height, then read the pros and cons and the before-and-after numbers.<br />
+             <b>Outcome:</b> A learning tool using a simplified blade-element and momentum model (baseline close to a light four-seat helicopter).</p>
+          <div class="stack"><span>JavaScript</span><span>Canvas</span><span>Fluid flow</span><span>Trade-off analysis</span></div>
+          <div class="links">
+            <button type="button" class="link link-btn embed-toggle" data-embed="rotorEmbed" aria-expanded="false" aria-controls="rotorEmbed">Play it here ▶</button>
+            <a href="rotor-lab/index.html" class="link" target="_blank" rel="noopener">Open full screen →</a>
+            <a href="https://github.com/amshrestha2020/portfolio/tree/main/rotor-lab" class="link" target="_blank" rel="noopener">View source →</a>
+          </div>
+        </article>
+        <div class="sim-embed" id="rotorEmbed" hidden>
+          <iframe title="Helicopter Rotor Lab" loading="lazy" data-src="rotor-lab/index.html"></iframe>
+        </div>
+
+        <article class="project featured reveal sim">
+          <span class="tag">Interactive · Warning-sign trainer</span>
+          <h3>Chopper Rotor &amp; Airflow Trainer</h3>
+          <p>A parked helicopter with turning blades. The blades turn <b>only</b> when the rotor speed, airflow speed, airflow direction and rotor direction are all correct. Make any one wrong and a flashing warning sign tells you what to fix.</p>
+          <div class="stack"><span>SVG</span><span>JavaScript</span><span>Warning logic</span></div>
+          <div class="links">
+            <button type="button" class="link link-btn embed-toggle" data-embed="chopperEmbed" aria-expanded="false" aria-controls="chopperEmbed">Play it here ▶</button>
+            <a href="chopper-trainer/index.html" class="link" target="_blank" rel="noopener">Open full screen →</a>
+            <a href="https://github.com/amshrestha2020/portfolio/tree/main/chopper-trainer" class="link" target="_blank" rel="noopener">View source →</a>
+          </div>
+        </article>
+        <div class="sim-embed" id="chopperEmbed" hidden>
+          <iframe title="Chopper Rotor and Airflow Trainer" loading="lazy" data-src="chopper-trainer/index.html"></iframe>
+        </div>
+
+        
+      </div>
+    </section>
+
     <!-- SKILLS -->
-    <section class="section alt" id="skills">
+    <section class="section" id="skills">
       <div class="container">
         <p class="eyebrow reveal">Tech stack</p>
         <h2 class="reveal">Toolbox</h2>
         <div class="skill-groups">
           <article class="card reveal">
             <h4>Backend</h4>
-            <div class="chips"><span>Java</span><span>Spring Boot</span><span>Python</span><span>Microservices</span><span>REST APIs</span></div>
+            <div class="chips"><span>Java</span><span>Spring Boot</span><span>Python</span><span>Node.js</span><span>Express</span><span>Microservices</span><span>REST APIs</span></div>
           </article>
           <article class="card reveal">
             <h4>Cloud &amp; DevOps</h4>
-            <div class="chips"><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span></div>
+            <div class="chips"><span>AWS</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span><span>GitHub Actions CI</span></div>
           </article>
           <article class="card reveal">
             <h4>Data</h4>
@@ -123,14 +346,14 @@
           </article>
           <article class="card reveal">
             <h4>AI &amp; Applied ML</h4>
-            <div class="chips"><span>Computer Vision</span><span>MediaPipe</span><span>Python</span></div>
+            <div class="chips"><span>LLM APIs</span><span>Prompt design</span><span>Responsible AI</span><span>AI governance</span><span>NotebookLM</span><span>Gamma</span><span>Computer Vision</span><span>MediaPipe</span></div>
           </article>
         </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
-    <section class="section" id="projects">
+    <section class="section alt" id="projects">
       <div class="container">
         <p class="eyebrow reveal">Selected work</p>
         <h2 class="reveal">Projects</h2>
@@ -138,7 +361,20 @@
 
         <div class="project-grid">
           <article class="project featured reveal">
-            <span class="tag">Featured · Computer Vision</span>
+            <span class="tag">Featured · AI Lab · Live demo</span>
+            <h3>StudyPal: AI study-planning coach</h3>
+            <p><b>Problem:</b> College students juggling classes, work and deadlines struggle to turn them into a realistic plan.<br />
+               <b>Approach:</b> Applied design thinking (empathize, define, ideate, prototype, test) to build a chatbot that asks one focused question at a time and produces a day-by-day weekly plan with breaks and a reason for the priority order.<br />
+               <b>Outcome:</b> A deployed web app with guardrails (no graded-work completion, no medical advice, no sensitive data, crisis referral), an offline mock mode, input validation, rate limiting, automated tests and CI.</p>
+            <div class="stack"><span>Node.js</span><span>Express</span><span>LLM API</span><span>Prompt design</span><span>GitHub Actions</span><span>Render</span></div>
+            <div class="links">
+              <a href="https://studypal-xaov.onrender.com/" class="link" target="_blank" rel="noopener">Try the live demo →</a>
+              <a href="https://github.com/amshrestha2020/studypal" class="link" target="_blank" rel="noopener">View source →</a>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <span class="tag">Computer Vision</span>
             <h3>Gesture Control App</h3>
             <p>Real-time hand gesture recognition built with MediaPipe, turning live camera input into interactive controls.</p>
             <div class="stack"><span>MediaPipe</span><span>Computer Vision</span><span>Real-time</span></div>
@@ -179,16 +415,13 @@
           <a class="repo reveal" href="https://github.com/amshrestha2020/frontend_design" target="_blank" rel="noopener">
             <h4>frontend_design</h4><p>Frontend design experiments.</p><span class="lang"><i class="js"></i>JavaScript</span>
           </a>
-          <a class="repo reveal" href="https://github.com/amshrestha2020/studypal" target="_blank" rel="noopener">
-            <h4>studypal</h4><p>In active development.</p><span class="lang"><i class="new"></i>Recent</span>
-          </a>
         </div>
         <p class="more reveal"><a class="link" href="https://github.com/amshrestha2020?tab=repositories" target="_blank" rel="noopener">See all repositories →</a></p>
       </div>
     </section>
 
     <!-- EDUCATION -->
-    <section class="section alt" id="journey">
+    <section class="section" id="journey">
       <div class="container narrow">
         <p class="eyebrow reveal">Journey</p>
         <h2 class="reveal">Experience &amp; education</h2>
@@ -202,7 +435,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="section" id="contact">
+    <section class="section alt" id="contact">
       <div class="container">
         <div class="contact-card reveal">
           <h2>Let's build something great.</h2>
@@ -219,7 +452,7 @@
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Ashesh Shrestha · Built with HTML, CSS &amp; JS</p>
+    <p>© <span id="year"></span> Ashesh Shrestha</p>
     <a href="#home">Back to top ↑</a>
   </footer>
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Helicopter Rotor Lab | Ashesh Shrestha</title>
+  <meta name="description" content="See how air flows through a helicopter rotor and over a blade, then change the blades, length, speed and pitch to see the pros and cons." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="back" href="../index.html#artifact2" target="_top">← Back to portfolio</a>
+    <nav class="links"><a href="../flight-simulator/index.html">Flight Simulator</a><a href="../chopper-trainer/index.html">Chopper Trainer</a><span class="brand">Rotor Lab</span></nav>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <p class="eyebrow">Portfolio Artifact 2 · Interactive</p>
+      <h1>Helicopter <span class="glow-text">Rotor Lab</span></h1>
+      <p class="lead">A rotor lifts a helicopter by pushing air down. Watch the air move through the rotor and over one blade, then change the design. The lab shows what you gain and what you pay for each change.</p>
+    </section>
+
+    <div class="grid">
+      <div class="col">
+        <section class="card">
+          <div class="card-head"><h2>Air through the rotor</h2><div class="btns"><button id="btnPause" class="chip" aria-pressed="false">Pause</button><button id="btnSlow" class="chip" aria-pressed="false">Slow motion</button></div></div>
+          <div id="alert" class="alertbar" role="alert" hidden></div>
+          <canvas id="flow" class="cv flow" aria-label="Animated side view of air flowing down through a helicopter rotor"></canvas>
+          <p class="legend"><i class="sw s1"></i> slow air <i class="sw s2"></i> fast air · white rings are tip vortices · rotor spin is slowed for visibility</p>
+        </section>
+        <section class="card">
+          <div class="card-head"><h2>Air over one blade</h2><span id="stallBadge" class="badge" hidden>STALL</span></div>
+          <canvas id="blade" class="cv blade" aria-label="Airflow around a blade cross-section"></canvas>
+          <p class="legend">Cross-section at 75% of the blade length, shown schematically. Red = fast air (low pressure on top), blue = slower air.</p>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="card">
+          <div class="card-head"><h2>Change the rotor</h2><canvas id="top" width="92" height="92" class="topview" aria-label="Top view of the rotor"></canvas></div>
+          <div class="try" role="group" aria-label="One-click experiments">
+            <span class="try-l">Try a change:</span>
+            <button class="chip" data-try="blade">+1 blade</button>
+            <button class="chip" data-try="long">+1 m longer</button>
+            <button class="chip" data-try="fast">+15% RPM</button>
+            <button class="chip" data-try="pitch">+3° pitch</button>
+            <button class="chip" data-try="ground">Hover low</button>
+          </div>
+          <div id="controls" class="controls"></div>
+          <div class="btns end"><button id="btnBase" class="chip strong">Set current as baseline</button><button id="btnReset" class="chip">Reset</button></div>
+          <div id="status" class="status" aria-live="polite"></div>
+        </section>
+
+        <section class="card">
+          <h2>Numbers: baseline vs. now</h2>
+          <table class="tbl"><thead><tr><th>Measure</th><th>Baseline</th><th>Now</th><th>Change</th></tr></thead><tbody id="rows"></tbody></table>
+          <p class="legend">Helicopter weight is fixed at 1,000 kg (9,810 N). Green = better, red = worse, grey = depends.</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="pc">
+      <div class="card pro"><h2>Pros of your change</h2><ul id="pros"></ul></div>
+      <div class="card con"><h2>Cons of your change</h2><ul id="cons"></ul></div>
+    </section>
+    <p class="note">Simplified blade-element and momentum model for learning. The baseline resembles a light four-seat helicopter. Values are indicative, not for design use.</p>
+  </main>
+  <footer class="foot">Built by Ashesh Shrestha</footer>
+  <script src="rotor-physics.js"></script>
+  <script src="rotor.js"></script>
+</body>
+</html>

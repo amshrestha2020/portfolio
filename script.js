@@ -20,7 +20,7 @@ const nav = document.getElementById("nav");
 window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 10), { passive: true });
 
 // Typing effect (edit these phrases)
-const phrases = ["real-world solutions.", "clear insights.", "intelligent products.", "better decisions."];
+const phrases = ["scalable microservices.", "cloud-native systems.", "reliable finance platforms.", "applied AI solutions."];
 const typed = document.getElementById("typed");
 let p = 0, c = 0, deleting = false;
 function type() {
@@ -36,7 +36,7 @@ type();
 // Scroll reveal + skill bars + counters
 const countUp = el => {
   const target = +el.dataset.count; let n = 0;
-  const step = () => { n += Math.max(1, Math.ceil(target / 30)); if (n >= target) n = target; el.textContent = n + "+"; if (n < target) requestAnimationFrame(step); };
+  const step = () => { n += Math.max(1, Math.ceil(target / 30)); if (n >= target) n = target; el.textContent = n + (el.dataset.suffix || ""); if (n < target) requestAnimationFrame(step); };
   step();
 };
 const io = new IntersectionObserver(entries => {
@@ -61,3 +61,26 @@ const spy = new IntersectionObserver(entries => {
 sections.forEach(s => spy.observe(s));
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Artifact 1: filter timeline by era
+const filterBtns = document.querySelectorAll(".filter");
+filterBtns.forEach(btn => btn.addEventListener("click", () => {
+  filterBtns.forEach(b => b.classList.toggle("active", b === btn));
+  const f = btn.dataset.filter;
+  document.querySelectorAll(".ai-timeline li").forEach(li => li.classList.toggle("hide", f !== "all" && li.dataset.era !== f));
+}));
+
+// Artifact 2: open each lab inside the page on demand
+document.querySelectorAll(".embed-toggle").forEach(btn => {
+  const box = document.getElementById(btn.dataset.embed);
+  const frame = box && box.querySelector("iframe");
+  if (!frame) return;
+  btn.addEventListener("click", () => {
+    const open = box.hidden;
+    if (open && !frame.getAttribute("src")) frame.setAttribute("src", frame.dataset.src);
+    box.hidden = !open;
+    btn.setAttribute("aria-expanded", String(open));
+    btn.textContent = open ? "Hide ▲" : "Play it here ▶";
+    if (open) box.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});

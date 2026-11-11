@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Flight Simulator | Ashesh Shrestha</title>
+  <meta name="description" content="A simple 3D flight simulator in your browser. Take off, fly, and land a small plane with realistic lift, drag, stall and ground effect." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="view" aria-label="3D flight view"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" hidden>
+    <div class="coach" id="coach"><span class="coach-tag" id="coachTag">Coach</span><span id="coachText"></span></div>
+    <div class="toolbar">
+      <button id="btnPause" title="Pause (P)" aria-label="Pause">⏸</button>
+      <button id="btnCam" title="Change camera (C)" aria-label="Change camera">🎥</button>
+      <button id="btnRestart" title="Restart (R)" aria-label="Restart">↺</button>
+      <button id="btnHelp" title="Controls (H)" aria-label="Show controls">?</button>
+    </div>
+    <div class="annun" id="annun" aria-label="Warning lights">
+      <span data-w="stall">STALL</span><span data-w="slow">LOW SPEED</span><span data-w="fast">OVERSPEED</span>
+      <span data-w="sink">SINK RATE</span><span data-w="low">LOW ALT</span><span data-w="high">HIGH ALT</span>
+      <span data-w="bank">STEEP BANK</span><span data-w="nose">NOSE HIGH</span><span data-w="off">OFF RUNWAY</span>
+    </div>
+    <div class="warn" id="warn" hidden></div>
+    <div class="toast" id="toast" hidden></div>
+
+    <div class="panel instruments">
+      <canvas id="att" width="132" height="132" aria-label="Attitude indicator"></canvas>
+      <div class="gauge"><span class="lbl">SPEED</span><b id="gSpd">0</b><span class="unit">kt</span></div>
+      <div class="gauge"><span class="lbl">ALTITUDE</span><b id="gAlt">0</b><span class="unit">ft</span></div>
+      <div class="gauge"><span class="lbl">CLIMB</span><b id="gVs">0</b><span class="unit">ft/min</span></div>
+      <div class="gauge"><span class="lbl">HEADING</span><b id="gHdg">0</b><span class="unit">°</span></div>
+    </div>
+    <div class="panel bars">
+      <div class="bar-wrap"><span class="lbl">THROTTLE</span><div class="vbar"><i id="thrBar"></i></div><b id="thrTxt">0%</b></div>
+      <div class="bar-wrap"><span class="lbl">ANGLE OF ATTACK</span><div class="vbar aoa"><i id="aoaBar"></i><u></u></div><b id="aoaTxt">0°</b></div>
+    </div>
+
+    <div class="touch" id="touch">
+      <div class="pad">
+        <button data-k="up">▲</button><button data-k="left">◀</button><button data-k="right">▶</button><button data-k="down">▼</button>
+      </div>
+      <div class="pad pad2">
+        <button data-k="thrUp">PWR +</button><button data-k="thrDn">PWR −</button><button data-k="brake">BRAKE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- START -->
+  <div class="overlay" id="start">
+    <div class="card">
+      <p class="eyebrow">Portfolio Artifact 2 · Interactive</p>
+      <h1>Flight Simulator</h1>
+      <p class="lead">Fly a small plane with real lift, drag, stalls and ground effect. No install, no sign-up. Choose how to start:</p>
+      <div class="modes">
+        <button class="mode" id="modeTake"><b>✈ Take off</b><span>Start on the runway. Learn to accelerate, rotate and climb.</span></button>
+        <button class="mode" id="modeLand"><b>🛬 Land</b><span>Start on final approach, 190 m up. Descend and touch down gently.</span></button>
+      </div>
+      <details class="how" open>
+        <summary>Controls</summary>
+        <div class="keys">
+          <div><kbd>↑</kbd><kbd>↓</kbd> nose up / down</div>
+          <div><kbd>←</kbd><kbd>→</kbd> bank left / right</div>
+          <div><kbd>W</kbd><kbd>S</kbd> more / less power</div>
+          <div><kbd>B</kbd> brake · <kbd>C</kbd> camera · <kbd>P</kbd> pause · <kbd>R</kbd> restart</div>
+        </div>
+        <label class="opt"><input type="checkbox" id="optInvert" /> Realistic pitch (↓ pulls the nose up, like a real yoke)</label>
+        <label class="opt"><input type="checkbox" id="optAssist" checked /> Stability assist (plane holds the angle you set. Turn off for a hard mode)</label>
+      </details>
+      <p class="hint links2">Also try: <a href="../rotor-lab/index.html">🚁 Helicopter Rotor Lab (how air flows over the blades, with pros and cons)</a> · <a href="../chopper-trainer/index.html">🚁 Chopper Airflow Trainer</a> · <a href="../kids/index.html">🧒 Kids version</a></p>
+      <p class="hint">Tip: speed is set by the nose angle, climb or descent is set by power. On phones, use the on-screen buttons.</p>
+    </div>
+  </div>
+
+  <!-- CRASH / LANDED -->
+  <div class="overlay" id="result" hidden>
+    <div class="card">
+      <p class="eyebrow" id="resEyebrow"></p>
+      <h2 id="resTitle"></h2>
+      <p class="lead" id="resText"></p>
+      <div class="actions">
+        <button class="btn" id="resAgain">Try again</button>
+        <button class="btn ghost" id="resKeep" hidden>Keep rolling</button>
+        <button class="btn ghost" id="resMenu">Change mode</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="nogl" hidden>
+    <div class="card"><h2>WebGL is not available</h2><p class="lead">This simulator needs WebGL for 3D graphics. Try a recent version of Chrome, Edge, Firefox or Safari with hardware acceleration enabled.</p></div>
+  </div>
+
+  <a class="back" href="../index.html#artifact2" target="_top">← Portfolio</a>
+
+  <script src="three.min.js"></script>
+  <script src="flight-physics.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

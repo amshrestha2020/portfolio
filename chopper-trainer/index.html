@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<meta name="description" content="Interactive helicopter rotor and airflow trainer with warning signs.">
+<title>Chopper Rotor & Airflow Trainer | Ashesh Shrestha</title>
+<style>
+:root{color-scheme:dark;--bg:#070d1b;--line:#293b5e;--text:#edf4ff;--muted:#9caecb;--cyan:#49d7ef;--green:#39d99a;--amber:#ffc45c;--red:#ff647c}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,#1b3760 0,#0a1427 48%,var(--bg) 80%) fixed;background-color:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,sans-serif}
+a{color:var(--cyan);text-decoration:none}
+.wrap{width:min(1180px,94%);margin:auto;padding:24px 0 50px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.eyebrow{font:12px ui-monospace,monospace;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+h1{font-size:clamp(26px,5vw,44px);line-height:1.08;margin:10px 0}
+h2{font-size:18px;margin:0 0 12px}
+.sub{color:var(--muted);max-width:780px}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(290px,.85fr);gap:18px;margin-top:22px}
+.panel{background:linear-gradient(160deg,#14233d,#0d172b);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 18px 50px #0004}
+.scene{position:relative;overflow:hidden;min-height:440px;background:linear-gradient(#0b1b32,#102847 68%,#172c3c 68%,#1b3340);border-radius:14px;border:1px solid #34506e}
+.scene-label{position:absolute;top:14px;left:16px;color:#b8d3ee;font:11px ui-monospace,monospace;letter-spacing:1px;z-index:2}
+.helicopter{position:absolute;width:min(88%,690px);height:auto;left:50%;top:63%;transform:translate(-50%,-50%);overflow:visible}
+.rotor{transform-box:fill-box;transform-origin:center;animation:spin var(--rotor-duration,.16s) linear infinite;animation-play-state:paused}
+.rotor.active{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.airflow{opacity:0;transition:opacity .25s}
+.airflow.show{opacity:.95}
+.flowline{stroke:#53d8ff;stroke-width:3;stroke-linecap:round;stroke-dasharray:10 12;animation:flow var(--flow-dur,1.1s) linear infinite}
+@keyframes flow{to{stroke-dashoffset:-44}}
+.flowline.up{animation-direction:reverse}
+.flowline.wrong{stroke:var(--red)}
+.ground{position:absolute;bottom:10%;left:12%;right:12%;height:2px;background:#b4d3df55}
+.pad{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);font:10px ui-monospace,monospace;color:#b8c8d4;letter-spacing:2px;white-space:nowrap}
+.sign-on-scene{position:absolute;left:50%;top:9%;transform:translateX(-50%);z-index:3;min-width:min(86%,430px);text-align:center;padding:10px 16px;border-radius:12px;font-weight:800;letter-spacing:1px;border:3px solid #fff;background:#d92b45;color:#fff;box-shadow:0 8px 30px #0008;animation:blink 1s steps(2) infinite}
+.sign-on-scene small{display:block;font-weight:600;letter-spacing:0;font-size:12px;opacity:.95}
+.sign-on-scene.good{background:#17835f;animation:none}
+@keyframes blink{50%{opacity:.55}}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:12px}
+.key{display:inline-flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cyan)}.dot.red{background:var(--red)}.dot.green{background:var(--green)}
+.side{display:grid;gap:18px;align-content:start}
+.status{display:flex;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:12px;background:#071222}
+.lamp{width:12px;height:12px;border-radius:50%;background:var(--amber);box-shadow:0 0 14px currentColor;flex:none}.lamp.good{background:var(--green)}.lamp.bad{background:var(--red)}
+.status strong{display:block}.status small{color:var(--muted)}
+.metric{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 4px}
+.metric strong{font:700 22px ui-monospace,monospace}
+input[type=range]{width:100%;accent-color:var(--cyan);cursor:pointer}
+.band{position:relative;height:6px;border-radius:3px;background:#1a2a47;margin:0 7px}
+.band i{position:absolute;top:0;bottom:0;background:var(--green);border-radius:3px;opacity:.85}
+.range-labels{display:flex;justify-content:space-between;color:var(--muted);font:11px ui-monospace,monospace}
+.control{margin:12px 0 16px}
+.seg{display:flex;gap:8px;margin-top:6px}
+.seg button{flex:1}
+.seg button[aria-pressed=true]{background:linear-gradient(120deg,#147b9b,#315bd6);border-color:transparent}
+.lab{font-size:13px;color:var(--muted)}
+.btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+button{border:1px solid #3c587c;background:#1a3151;color:var(--text);padding:10px 14px;border-radius:10px;font:600 13px Inter,system-ui,sans-serif;cursor:pointer}
+button.primary{background:linear-gradient(120deg,#147b9b,#315bd6);border:0}
+button:hover{filter:brightness(1.15)}button:disabled{opacity:.6;cursor:default}
+.warning{border:1px solid var(--line);border-radius:12px;padding:13px;background:#071222;margin-top:12px}
+.warning.good{border-color:#237e61}.warning.bad{border-color:#9d394c;background:#2b1220}
+.warning h3{font-size:13px;margin:0 0 5px}.warning p{margin:0;color:var(--muted);font-size:13px}
+.warning.bad h3{color:#ff8797}.warning.good h3{color:var(--green)}
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.gauge{background:#091426;border:1px solid var(--line);border-radius:12px;padding:12px}
+.gauge b{font:700 20px ui-monospace,monospace;display:block}.gauge small{color:var(--muted)}
+.notes{color:var(--muted);font-size:12px;margin-top:12px}
+.signs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.sign{border:1px solid #237e61;border-radius:10px;padding:9px;text-align:center;font-size:11px;color:#a6e9cf;background:#0b2a24}
+.sign b{display:block;font-size:20px;margin-bottom:2px}
+.sign.bad{border-color:#9d394c;background:#3a1423;color:#ffb0bc;animation:blink 1s steps(2) infinite}
+.footer{margin-top:20px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.scene{min-height:350px}}
+@media(max-width:480px){.scene{min-height:290px}.panel{padding:14px}}
+@media (prefers-reduced-motion:reduce){.sign-on-scene,.sign.bad{animation:none}}
+</style>
+</head>
+<body><main class="wrap">
+<div class="top"><a href="../index.html#artifact2" target="_top">← Back to portfolio</a><a href="../flight-simulator/index.html">✈ Flight simulator</a><span class="eyebrow">Rotor systems training · Demo</span></div>
+<h1>Chopper <span style="color:var(--cyan)">Rotor &amp; Airflow</span> Trainer</h1>
+<p class="sub">A parked, Bell 407-inspired helicopter. The body never moves. The blades turn <b>only</b> when the rotor speed, airflow speed, airflow direction and rotor direction are all correct. Change any one of them and a warning sign appears.</p>
+
+<div class="layout">
+<section class="panel">
+<div class="scene" aria-label="Animated helicopter model and airflow">
+<div class="scene-label">MODEL: LIGHT SINGLE-ENGINE TURBINE · PARKED</div>
+<div class="sign-on-scene" id="sceneSign" role="alert" hidden></div>
+<svg class="helicopter" viewBox="0 0 760 390" role="img" aria-label="Side view of a parked helicopter with turning main and tail rotor">
+<defs><linearGradient id="body" x2="0" y2="1"><stop stop-color="#dce8f2"/><stop offset=".5" stop-color="#829bb2"/><stop offset="1" stop-color="#425b75"/></linearGradient><linearGradient id="glass"><stop stop-color="#15334c"/><stop offset="1" stop-color="#55c8df"/></linearGradient>
+<marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#53d8ff"/></marker></defs>
+<g class="airflow" id="airflowSvg" fill="none"><path class="flowline" d="M350 174 C340 220 355 245 340 290"/><path class="flowline" d="M390 174 C405 220 385 250 405 300"/><path class="flowline" d="M430 174 C445 218 430 255 450 294"/><path class="flowline" d="M310 180 C300 220 315 250 300 285"/><path class="flowline" d="M470 180 C480 220 465 250 485 285"/></g>
+<path d="M330 188 L110 153 L98 165 L304 210Z" fill="#718ba3" stroke="#d0dce8" stroke-width="3"/><path d="M138 160 L110 128 L96 132 L108 169Z" fill="#9bb0c3"/><path d="M150 161 L120 150 L116 160 L142 171Z" fill="#e2eaf2"/>
+<path d="M282 157 Q315 110 397 111 L492 124 Q543 137 552 177 L543 207 Q518 229 460 230 L332 216 Q291 207 276 184Z" fill="url(#body)" stroke="#dbe7f1" stroke-width="3"/>
+<path d="M475 126 Q525 136 541 169 L530 190 L482 181Z" fill="url(#glass)" stroke="#b7d5e6" stroke-width="3"/><path d="M487 131 L484 180" stroke="#b7d5e6" stroke-width="2"/><path d="M530 170 L544 174" stroke="#e5edf5" stroke-width="3"/>
+<path d="M366 125 L420 126 L420 183 L355 179Z" fill="url(#glass)" stroke="#d7e6f0" stroke-width="3"/><path d="M426 127 L473 130 L478 183 L426 182Z" fill="url(#glass)" stroke="#d7e6f0" stroke-width="3"/><path d="M423 126 L423 184" stroke="#e4edf5" stroke-width="3"/>
+<path d="M350 188 L350 213 M420 188 L420 222" stroke="#4c627a" stroke-width="3"/><path d="M290 189 Q390 215 529 197" fill="none" stroke="#263e59" stroke-width="4"/><path d="M328 211 L326 239 L490 239 L490 228" fill="none" stroke="#b9c8d6" stroke-width="5"/><path d="M330 239 L314 244 M486 239 L502 244" stroke="#d6e2eb" stroke-width="5"/>
+<circle cx="105" cy="157" r="9" fill="#e5edf5" stroke="#1d334b" stroke-width="3"/>
+<g id="tailRotor" class="rotor"><path d="M105 157 L105 112 Q111 103 116 112 L111 157Z" fill="#dce7f0"/><path d="M105 157 L105 202 Q99 211 94 202 L99 157Z" fill="#dce7f0"/><path d="M105 157 L60 157 Q51 151 60 146 L105 151Z" fill="#dce7f0"/><path d="M105 157 L150 157 Q159 163 150 168 L105 163Z" fill="#dce7f0"/></g>
+<path d="M391 110 L391 70" stroke="#b9c8d8" stroke-width="8"/><circle cx="391" cy="70" r="9" fill="#e8eff5" stroke="#2c4560" stroke-width="3"/>
+<g id="mainRotor" class="rotor"><path d="M391 70 L80 62 Q69 60 81 54 L389 63Z" fill="#dce8f2" stroke="#8ba1b7" stroke-width="1.5"/><path d="M391 70 L702 78 Q713 80 701 86 L393 77Z" fill="#dce8f2" stroke="#8ba1b7" stroke-width="1.5"/><path d="M391 70 L385 66 L390 45 L396 66Z" fill="#eaf2f8"/></g>
+<text x="391" y="275" text-anchor="middle" fill="#b7d4e8" font-size="13" letter-spacing="3">PARKED · TRAINING DISPLAY</text>
+<text id="dirTxt" x="391" y="300" text-anchor="middle" fill="#9caecb" font-size="12"></text>
+</svg>
+<div class="ground"></div><div class="pad">HELICOPTER · PARKED / NO MOVEMENT</div></div>
+<div class="legend"><span class="key"><i class="dot"></i> Blue lines: normal airflow (downward)</span><span class="key"><i class="dot red"></i> Red lines: airflow fault</span><span class="key"><i class="dot green"></i> Green band on slider: correct range</span></div>
+<div class="gauges"><div class="gauge"><b id="rpmRead">400 RPM</b><small>Main rotor speed (simulated)</small></div><div class="gauge"><b id="airRead">70 m/s</b><small>Airflow speed (simulated)</small></div></div>
+</section>
+
+<aside class="side">
+<section class="panel"><h2>Controls</h2>
+<div class="control"><div class="metric"><label for="rpm">Rotor speed (RPM)</label><strong id="rpmVal">400</strong></div>
+<input id="rpm" type="range" min="0" max="500" value="400" step="5"><div class="band"><i style="left:70%;width:20%"></i></div><div class="range-labels"><span>0</span><span>correct 350–450</span><span>500</span></div></div>
+<div class="control"><div class="metric"><label for="air">Airflow speed (m/s)</label><strong id="airVal">70</strong></div>
+<input id="air" type="range" min="0" max="120" value="70" step="1"><div class="band"><i style="left:45.8%;width:25%"></i></div><div class="range-labels"><span>0</span><span>correct 55–85</span><span>120</span></div></div>
+<div class="control"><div class="lab">Airflow direction (correct: downward)</div><div class="seg" id="segFlow"><button data-v="down" aria-pressed="true">⬇ Downward</button><button data-v="up" aria-pressed="false">⬆ Upward</button></div></div>
+<div class="control"><div class="lab">Rotor direction (correct: counter-clockwise from above)</div><div class="seg" id="segSpin"><button data-v="ccw" aria-pressed="true">↺ Counter-clockwise</button><button data-v="cw" aria-pressed="false">↻ Clockwise</button></div></div>
+<div class="btns"><button class="primary" id="start">Start rotor</button><button id="stop">Stop rotor</button><button id="reset">Reset</button></div>
+<div class="notes">The blades turn only when everything is correct. Real rotor directions and limits differ by helicopter model. This trainer uses simple demo rules.</div></section>
+
+<section class="panel"><h2>System status</h2>
+<div class="status"><i class="lamp" id="lamp"></i><div><strong id="statusTitle">CHECKING</strong><small id="statusSub">Adjust controls to check</small></div></div>
+<div class="warning" id="warning"><h3 id="warningTitle">STANDBY</h3><p id="warningText"></p></div>
+<div class="signs"><div class="sign" id="sRpm"><b>⚙</b>Rotor RPM</div><div class="sign" id="sAir"><b>💨</b>Airflow speed</div><div class="sign" id="sFlow"><b>⇅</b>Airflow direction</div><div class="sign" id="sSpin"><b>↺</b>Rotor direction</div></div></section>
+</aside></div>
+<p class="footer">Educational visualization only. Not a certified simulator, maintenance guide or real operating procedure.</p>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const rpm = $('rpm'), air = $('air'), main = $('mainRotor'), tail = $('tailRotor'), flow = $('airflowSvg');
+  let running = false, flowDir = 'down', spinDir = 'ccw';
+
+  function seg(id, set) {
+    $(id).querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      $(id).querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      set(b.dataset.v); evaluate();
+    }));
+  }
+  seg('segFlow', v => flowDir = v);
+  seg('segSpin', v => spinDir = v);
+
+  function mark(id, ok) { $(id).className = 'sign' + (ok ? '' : ' bad'); }
+
+  function evaluate() {
+    const r = +rpm.value, a = +air.value;
+    const rpmOK = r >= 350 && r <= 450, airOK = a >= 55 && a <= 85;
+    const flowOK = flowDir === 'down', spinOK = spinDir === 'ccw';
+    const ok = rpmOK && airOK && flowOK && spinOK, enabled = running && ok;
+    $('rpmVal').textContent = r; $('airVal').textContent = a;
+    $('rpmRead').textContent = r + ' RPM'; $('airRead').textContent = a + ' m/s';
+
+    // problems, most important first
+    const bad = [];
+    if (!spinOK) bad.push(['ROTOR TURNING THE WRONG WAY', 'Switch rotor direction to counter-clockwise.']);
+    if (!flowOK) bad.push(['AIRFLOW GOING THE WRONG WAY', 'Air must flow downward through the rotor.']);
+    if (r === 0) bad.push(['ROTOR SPEED IS ZERO', 'Raise the rotor RPM to 350–450.']);
+    else if (r < 350) bad.push(['ROTOR SPEED TOO LOW', 'Increase the rotor RPM to 350–450.']);
+    else if (r > 450) bad.push(['ROTOR SPEED TOO HIGH', 'Decrease the rotor RPM to 350–450.']);
+    if (a < 55) bad.push(['AIRFLOW TOO LOW', 'Increase airflow to 55–85 m/s.']);
+    else if (a > 85) bad.push(['AIRFLOW TOO HIGH', 'Decrease airflow to 55–85 m/s.']);
+
+    // blades move only when everything is correct
+    [main, tail].forEach(el => { el.classList.toggle('active', enabled); el.style.setProperty('--rotor-duration', Math.max(.035, 60 / Math.max(r, 1)) + 's'); });
+
+    // airflow arrows: always visible when there is airflow; red when wrong; reversed when upward
+    flow.classList.toggle('show', a > 0);
+    flow.querySelectorAll('.flowline').forEach(el => {
+      el.classList.toggle('wrong', !airOK || !flowOK);
+      el.classList.toggle('up', !flowOK);
+      el.style.setProperty('--flow-dur', Math.max(.3, 2.4 - a / 55).toFixed(2) + 's');
+    });
+    $('dirTxt').textContent = 'Airflow: ' + (flowOK ? '⬇ down' : '⬆ up') + '   ·   Rotor: ' + (spinOK ? '↺ counter-clockwise' : '↻ clockwise');
+
+    // warning signs
+    mark('sRpm', rpmOK); mark('sAir', airOK); mark('sFlow', flowOK); mark('sSpin', spinOK);
+    const sign = $('sceneSign');
+    if (bad.length) {
+      sign.hidden = false; sign.className = 'sign-on-scene';
+      sign.innerHTML = '⚠ ' + bad[0][0] + '<small>' + bad[0][1] + (bad.length > 1 ? '  (+' + (bad.length - 1) + ' more)' : '') + '</small>';
+    } else if (enabled) {
+      sign.hidden = false; sign.className = 'sign-on-scene good'; sign.innerHTML = '✓ ALL CORRECT<small>Blades turning at the correct speed and direction</small>';
+    } else sign.hidden = true;
+
+    $('lamp').className = 'lamp ' + (ok ? 'good' : 'bad');
+    $('statusTitle').textContent = enabled ? 'NORMAL · ROTOR RUNNING' : ok ? 'READY · ROTOR STOPPED' : 'WARNING · BLADES LOCKED';
+    $('statusSub').textContent = enabled ? 'The helicopter stays parked.' : ok ? 'Press Start rotor.' : 'Fix the red items to let the blades turn.';
+    $('warning').className = 'warning ' + (enabled ? 'good' : ok ? '' : 'bad');
+    $('warningTitle').textContent = enabled ? '✓ NORMAL OPERATION' : ok ? '⏸ READY' : '⚠ BLADES LOCKED';
+    $('warningText').textContent = enabled ? 'Speed and direction are correct. Air flows downward under the rotor.' : ok ? 'Everything is correct. Start the rotor.' : bad.map(b => b[0].toLowerCase()).join('; ') + '.';
+    $('start').disabled = enabled; $('start').textContent = enabled ? 'Rotor running' : 'Start rotor';
+  }
+
+  rpm.addEventListener('input', evaluate); air.addEventListener('input', evaluate);
+  $('start').addEventListener('click', () => { running = true; evaluate(); });
+  $('stop').addEventListener('click', () => { running = false; evaluate(); });
+  $('reset').addEventListener('click', () => {
+    rpm.value = 400; air.value = 70; running = false; flowDir = 'down'; spinDir = 'ccw';
+    document.querySelectorAll('.seg').forEach(s => s.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', i === 0)));
+    evaluate();
+  });
+  evaluate();
+  window.__ct = { evaluate, set: (k, v) => { ({ rpm, air })[k] ? ({ rpm, air })[k].value = v : 0; evaluate(); }, state: () => ({ running, flowDir, spinDir }) };
+})();
+</script></body></html>
