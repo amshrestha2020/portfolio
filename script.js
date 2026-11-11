@@ -69,6 +69,7 @@ filterBtns.forEach(btn => btn.addEventListener("click", () => {
   const f = btn.dataset.filter;
   document.querySelectorAll(".ai-timeline li").forEach(li => li.classList.toggle("hide", f !== "all" && li.dataset.era !== f));
 }));
+<<<<<<< HEAD
 
 // Artifact 2: open each lab inside the page on demand
 document.querySelectorAll(".embed-toggle").forEach(btn => {
@@ -84,3 +85,5 @@ document.querySelectorAll(".embed-toggle").forEach(btn => {
     if (open) box.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 });
+=======
+>>>>>>> e393d9d9785071a6cb8641f00288367841f59fea
