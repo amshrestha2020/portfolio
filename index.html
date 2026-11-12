@@ -42,7 +42,7 @@
       <div class="container hero-grid">
         <div class="hero-text reveal">
           <span class="badge"><i class="dot"></i> Open to opportunities</span>
-          <h1>Hi, I'm <span class="gradient-text">Ashesh Shrestha</span>.<br />I build <span class="typed-wrap"><span id="typed"></span><span class="cursor">|</span></span></h1>
+          <h1>Hi, I'm <span class="gradient-text">Ashesh Shrestha</span>.<br /><span id="prefix">I build </span><span class="typed-wrap"><span id="typed"></span><span class="cursor">|</span></span></h1>
           <p class="lead">
             Software Engineer with 5+ years building microservices, backend systems and cloud infrastructure
             for financial services platforms, now pairing that engineering depth with an MSc in Artificial Intelligence.
@@ -76,6 +76,14 @@
         </div>
       </div>
     </section>
+
+    <!-- SERVICES TICKER -->
+    <div class="ticker" aria-label="Services I offer">
+      <button type="button" class="ticker-btn" id="tickerBtn" aria-pressed="false" aria-label="Pause scrolling services">⏸</button>
+      <div class="ticker-view">
+        <ul class="ticker-track" id="tickerTrack"><li>Microservices &amp; REST APIs</li><li>Backend development (Java, Spring Boot, Python, Node.js)</li><li>Cloud-native systems (AWS, Docker, Kubernetes)</li><li>Financial services platforms</li><li>Applied AI solutions</li><li>LLM apps &amp; prompt design</li><li>Responsible AI &amp; AI governance</li><li>CI/CD with GitHub Actions</li><li>Data analytics</li><li>Computer vision</li></ul>
+      </div>
+    </div>
 
     <!-- ABOUT -->
     <section class="section" id="about">
@@ -241,7 +249,7 @@
             <div class="chips">
               <span>Consensus</span><span>NotebookLM</span><span>Flight simulator</span>
             </div>
-            <p>I used Consensus to find research-backed answers, NotebookLM to work from my own source documents, and a flight simulator to practice using AI in a safe setting. I then built my own flight simulator, a helicopter rotor lab and a prompt simulator (below).</p>
+            <p>I used Consensus to find research-backed answers, NotebookLM to work from my own source documents, and a flight simulator to practice using AI in a safe setting. I then built my own flight simulator, a helicopter rotor lab and a chopper airflow trainer (below).</p>
           </article>
           <article class="card reveal">
             <div class="ico">📊</div>
@@ -320,6 +328,15 @@
         </article>
         <div class="sim-embed" id="chopperEmbed" hidden>
           <iframe title="Chopper Rotor and Airflow Trainer" loading="lazy" data-src="chopper-trainer/index.html"></iframe>
+        </div>
+
+        <div class="callout reveal">
+          <h4>Why this matters to you</h4>
+          <p>
+            In financial services, adopting AI safely takes both technical understanding and good governance.
+            This artifact shows how I learn: I study the concepts, test the tools myself, and turn what I
+            learn into something a leadership team can use.
+          </p>
         </div>
       </div>
     </section>

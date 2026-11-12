@@ -74,7 +74,7 @@ ul, ol { list-style: none; }
 .btn-light { background: #fff; color: #1e1e5a; box-shadow: none; }
 
 /* HERO */
-.hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
+.hero { position: relative; min-height: calc(100vh - 62px); display: flex; align-items: center; padding: 110px 0 50px; overflow: hidden; }
 .glow { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.35; z-index: 0; }
 .glow-1 { width: 420px; height: 420px; background: var(--primary); top: -80px; left: -100px; }
 .glow-2 { width: 380px; height: 380px; background: var(--primary-2); bottom: -80px; right: -60px; }
@@ -303,3 +303,19 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -1px; line-height:
 .sim-embed { margin: 0 0 24px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #060a16; }
 .sim-embed iframe { display: block; width: 100%; height: 780px; border: 0; }
 @media (max-width: 700px) { .sim-embed iframe { height: 900px; } }
+
+/* Hero: message settles after a few rounds, then a services ticker */
+.cursor.done { animation: none; opacity: 0; transition: opacity .6s; }
+.ticker { display: flex; align-items: center; gap: 12px; padding: 14px 4%; border-block: 1px solid var(--border); background: var(--surface); }
+.ticker-btn { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-size: .8rem; }
+.ticker-view { overflow: hidden; flex: 1; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.ticker-track { display: flex; gap: 38px; width: max-content; margin: 0; padding: 0; list-style: none; animation: tick 55s linear infinite; }
+.ticker-track li { white-space: nowrap; font-weight: 600; font-size: .95rem; color: var(--muted); }
+.ticker-track li::before { content: "◆"; color: var(--primary); margin-right: 12px; font-size: .7rem; }
+.ticker:hover .ticker-track, .ticker.paused .ticker-track { animation-play-state: paused; }
+@keyframes tick { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; flex-wrap: wrap; width: auto; }
+  .ticker-view { -webkit-mask-image: none; mask-image: none; }
+  .ticker-btn { display: none; }
+}
