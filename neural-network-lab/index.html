@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<meta name="description" content="Neural networks explained simply, with a small network you can train in your browser.">
+<title>Neural Network Playground | Ashesh Shrestha</title>
+<style>
+:root{color-scheme:dark;--bg:#070d1b;--line:#293b5e;--text:#edf4ff;--muted:#9caecb;--cyan:#49d7ef;--green:#39d99a;--amber:#ffc45c;--red:#ff647c;--orange:#ff9f43;--blue:#5aa0ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,#1b3760 0,#0a1427 48%,var(--bg) 80%) fixed;background-color:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,sans-serif}
+a{color:var(--cyan);text-decoration:none}
+.wrap{width:min(1100px,94%);margin:auto;padding:22px 0 46px}
+.eyebrow{font:12px ui-monospace,monospace;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+h1{font-size:clamp(26px,5vw,42px);line-height:1.1;margin:8px 0}
+h2{font-size:17px;margin:0 0 10px}
+.sub{color:var(--muted);max-width:760px}
+.panel{background:linear-gradient(160deg,#14233d,#0d172b);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 18px 50px #0004}
+.explain{margin-top:18px}
+.explain p{margin:0 0 10px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.step{background:#091426;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px;color:var(--muted)}
+.step b{display:block;color:var(--text);font-size:14px;margin-bottom:2px}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:18px;margin-top:18px}
+canvas{display:block;width:100%;border-radius:12px;background:#050a1c;border:1px solid var(--line)}
+#map{aspect-ratio:1/1;max-width:520px;margin:auto}
+#net{aspect-ratio:16/7;margin-top:10px}
+.ctl{margin:12px 0}
+.ctl label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ctl label b{color:var(--text);font-family:ui-monospace,monospace}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+button{border:1px solid #3c587c;background:#1a3151;color:var(--text);padding:9px 12px;border-radius:10px;font:600 13px Inter,system-ui,sans-serif;cursor:pointer}
+button[aria-pressed=true]{background:linear-gradient(120deg,#147b9b,#315bd6);border-color:transparent}
+button.primary{background:linear-gradient(120deg,#147b9b,#315bd6);border:0}
+button:hover{filter:brightness(1.15)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stat{background:#091426;border:1px solid var(--line);border-radius:12px;padding:9px;text-align:center}
+.stat b{display:block;font:700 18px ui-monospace,monospace}.stat small{color:var(--muted);font-size:11px}
+.msg{border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#071222;font-size:13.5px;min-height:62px}
+.msg.good{border-color:#237e61;background:#0b2a24}.msg.warn{border-color:#9d6a1d;background:#2b2210}.msg.bad{border-color:#9d394c;background:#2b1220}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:10px;justify-content:center}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body><main class="wrap">
+<p><a href="../index.html#artifact3" target="_top">← Back to portfolio</a></p>
+<p class="eyebrow">Workshop 3 · Neural networks</p>
+<h1>Neural Network <span style="color:var(--cyan)">Playground</span></h1>
+<p class="sub">Einstein is said to have said: if you cannot explain it simply, you do not understand it well enough. So here is a neural network in plain words, and a tiny one you can train yourself.</p>
+
+<section class="panel explain">
+<h2>A neural network in plain words</h2>
+<p>A neural network is a <b>team of very simple decision-makers</b> arranged in layers. Each one looks at some numbers, treats some of them as more important than others (these importance scores are called <b>weights</b>), adds them up, and decides how loudly to speak up (that rule is the <b>activation function</b>).</p>
+<p>The first layer sees the raw input, like the pixels of a photo. Later layers combine those signals into bigger ideas: edges, then shapes, then "this is a cat". At first the team guesses badly. Each time, we tell the team how wrong it was, and every member nudges its weights a tiny bit to be less wrong next time. After thousands of nudges, the team gets good. That is learning: <b>practice with feedback</b>, not memorizing rules.</p>
+<div class="steps">
+<div class="step"><b>1. Input</b>The numbers go in (here: a point's x and y).</div>
+<div class="step"><b>2. Hidden layer</b>Little deciders weigh the inputs and respond.</div>
+<div class="step"><b>3. Output</b>The team gives an answer: orange or blue.</div>
+<div class="step"><b>4. Feedback</b>We measure the error and nudge the weights. Repeat.</div>
+</div>
+</section>
+
+<div class="layout">
+<section class="panel">
+<h2>What the network has learned</h2>
+<canvas id="map" width="520" height="520" aria-label="Decision map: background color shows the network's answer for each position, dots are the training data"></canvas>
+<div class="legend"><span><i class="dot" style="background:var(--orange)"></i>Group A</span><span><i class="dot" style="background:var(--blue)"></i>Group B</span><span>Background = what the network thinks</span></div>
+<canvas id="net" width="640" height="280" aria-label="Network diagram"></canvas>
+</section>
+
+<section class="panel">
+<h2>Controls</h2>
+<div class="ctl"><label>Pattern to learn</label><div class="seg" id="segData"><button data-v="xor" aria-pressed="true">XOR (tricky)</button><button data-v="circle" aria-pressed="false">Circle</button><button data-v="blobs" aria-pressed="false">Two groups (easy)</button></div></div>
+<div class="ctl"><label>Activation function</label><div class="seg" id="segAct"><button data-v="tanh" aria-pressed="true">Tanh</button><button data-v="relu" aria-pressed="false">ReLU</button><button data-v="sigmoid" aria-pressed="false">Sigmoid</button><button data-v="linear" aria-pressed="false">None</button></div></div>
+<div class="ctl"><label for="hid">Hidden neurons <b id="hidV">4</b></label><input id="hid" type="range" min="1" max="8" value="4"></div>
+<div class="ctl"><label for="lr">Learning speed <b id="lrV">0.30</b></label><input id="lr" type="range" min="0.02" max="1" step="0.02" value="0.3"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="train">Pause</button><button id="reset">Start over</button></div>
+<div class="stats"><div class="stat"><b id="ep">0</b><small>rounds of practice</small></div><div class="stat"><b id="loss">-</b><small>error (loss)</small></div><div class="stat"><b id="acc">-</b><small>correct</small></div></div>
+<div class="msg" id="msg"></div>
+</section>
+</div>
+<p class="footer">Educational demo: a 2-input, 1-hidden-layer network trained with gradient descent in your browser. Nothing is sent anywhere.</p>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const map = $('map'), mg = map.getContext('2d'), net = $('net'), ng = net.getContext('2d');
+  let data = 'xor', act = 'tanh', H = 4, lr = 0.3, running = true, epoch = 0;
+  let pts = [], W1, B1, W2, B2, lossV = 0, accV = 0;
+
+  // simple seeded random so a "start over" gives a fresh network each time
+  const rnd = () => Math.random(), gauss = () => Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(2 * Math.PI * rnd());
+
+  const ACT = {
+    tanh: [x => Math.tanh(x), y => 1 - y * y],
+    relu: [x => Math.max(0, x), y => y > 0 ? 1 : 0],
+    sigmoid: [x => 1 / (1 + Math.exp(-x)), y => y * (1 - y)],
+    linear: [x => x, () => 1]
+  };
+  const sig = x => 1 / (1 + Math.exp(-x));
+
+  function makeData() {
+    pts = [];
+    while (pts.length < 200) {
+      let x, y, t;
+      if (data === 'blobs') {
+        t = rnd() < .5 ? 0 : 1;
+        x = (t ? .45 : -.45) + gauss() * .18; y = (t ? .4 : -.4) + gauss() * .18;
+        if (Math.abs(x) > 1 || Math.abs(y) > 1) continue;
+      } else {
+        x = rnd() * 2 - 1; y = rnd() * 2 - 1;
+        if (data === 'xor') { if (Math.abs(x) < .1 || Math.abs(y) < .1) continue; t = x * y > 0 ? 1 : 0; }
+        else { const r = Math.hypot(x, y); if (r > .95 || (r > .45 && r < .6)) continue; t = r < .5 ? 1 : 0; }
+      }
+      pts.push({ x, y, t });
+    }
+  }
+  function init() {
+    W1 = Array.from({ length: H }, () => [gauss() * .8, gauss() * .8]);
+    B1 = Array.from({ length: H }, () => gauss() * .1);
+    W2 = Array.from({ length: H }, () => gauss() * .6);
+    B2 = 0; epoch = 0; lossV = 0; accV = 0; done = false;
+  }
+  function forward(x, y) {
+    const a = new Array(H);
+    let z2 = B2;
+    for (let j = 0; j < H; j++) { a[j] = ACT[act][0](W1[j][0] * x + W1[j][1] * y + B1[j]); z2 += W2[j] * a[j]; }
+    return { a, p: sig(z2) };
+  }
+  function trainStep() {
+    const gW1 = W1.map(() => [0, 0]), gB1 = new Array(H).fill(0), gW2 = new Array(H).fill(0); let gB2 = 0, L = 0, ok = 0;
+    for (const q of pts) {
+      const { a, p } = forward(q.x, q.y), d2 = p - q.t;
+      L += -(q.t * Math.log(p + 1e-9) + (1 - q.t) * Math.log(1 - p + 1e-9)); ok += (p > .5) === (q.t === 1);
+      gB2 += d2;
+      for (let j = 0; j < H; j++) {
+        gW2[j] += d2 * a[j];
+        const d1 = d2 * W2[j] * ACT[act][1](a[j]);
+        gW1[j][0] += d1 * q.x; gW1[j][1] += d1 * q.y; gB1[j] += d1;
+      }
+    }
+    const n = pts.length, r = lr;
+    for (let j = 0; j < H; j++) { W1[j][0] -= r * gW1[j][0] / n; W1[j][1] -= r * gW1[j][1] / n; B1[j] -= r * gB1[j] / n; W2[j] -= r * gW2[j] / n; }
+    B2 -= r * gB2 / n; lossV = L / n; accV = ok / n; epoch++;
+  }
+
+  function drawMap() {
+    const N = 40, off = drawMap.off || (drawMap.off = document.createElement('canvas'));
+    off.width = off.height = N; const og = off.getContext('2d'), img = og.createImageData(N, N);
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
+      const p = forward((j / (N - 1)) * 2 - 1, 1 - (i / (N - 1)) * 2).p, k = (i * N + j) * 4;
+      img.data[k] = 255 * p + 60 * (1 - p); img.data[k + 1] = 150 * p + 120 * (1 - p); img.data[k + 2] = 60 * p + 255 * (1 - p); img.data[k + 3] = 150;
+    }
+    og.putImageData(img, 0, 0);
+    mg.clearRect(0, 0, 520, 520); mg.imageSmoothingEnabled = true; mg.drawImage(off, 0, 0, 520, 520);
+    for (const q of pts) {
+      mg.beginPath(); mg.arc((q.x + 1) / 2 * 520, (1 - q.y) / 2 * 520, 5, 0, 7);
+      mg.fillStyle = q.t ? '#ff9f43' : '#5aa0ff'; mg.fill(); mg.strokeStyle = '#fff'; mg.lineWidth = 1.2; mg.stroke();
+    }
+  }
+  function drawNet() {
+    const w = 640, h = 280; ng.clearRect(0, 0, w, h);
+    const xs = [70, 320, 570], inY = [h * .38, h * .62], hy = j => 18 + (j + .5) * (h - 56) / H, oy = (h - 20) / 2;
+    const line = (x1, y1, x2, y2, wt) => { ng.strokeStyle = wt > 0 ? 'rgba(255,159,67,' + Math.min(1, .15 + Math.abs(wt) * .4) + ')' : 'rgba(90,160,255,' + Math.min(1, .15 + Math.abs(wt) * .4) + ')'; ng.lineWidth = .5 + Math.min(4, Math.abs(wt) * 1.6); ng.beginPath(); ng.moveTo(x1, y1); ng.lineTo(x2, y2); ng.stroke(); };
+    for (let j = 0; j < H; j++) { line(xs[0], inY[0], xs[1], hy(j), W1[j][0]); line(xs[0], inY[1], xs[1], hy(j), W1[j][1]); line(xs[1], hy(j), xs[2], oy, W2[j]); }
+    const node = (x, y, c, t) => { ng.beginPath(); ng.arc(x, y, 14, 0, 7); ng.fillStyle = c; ng.fill(); ng.strokeStyle = '#fff'; ng.stroke(); };
+    inY.forEach(y => node(xs[0], y, '#243b63')); for (let j = 0; j < H; j++) node(xs[1], hy(j), '#243b63'); node(xs[2], oy, '#243b63');
+    ng.fillStyle = '#9caecb'; ng.font = '13px Inter, sans-serif'; ng.textAlign = 'center';
+    ng.fillText('Input (x, y)', xs[0], h - 6); ng.fillText('Hidden layer', xs[1], h - 6); ng.fillText('Answer', xs[2], h - 6);
+    ng.fillStyle = '#ff9f43'; ng.textAlign = 'left'; ng.fillText('orange = positive weight', 8, 16); ng.fillStyle = '#5aa0ff'; ng.fillText('blue = negative weight', 8, 34);
+  }
+
+  let done = false;
+  function message() {
+    const m = $('msg');
+    let txt, cls = '';
+    if (epoch < 30) { txt = 'Starting out: the network is guessing. Watch the background colors reshape as it practices.'; }
+    else if (accV >= .97) { done = true; txt = '✓ It learned the pattern (' + Math.round(accV * 100) + '% correct). Try another pattern, or remove neurons to see where it breaks.'; cls = 'good'; }
+    else if (act === 'linear' && data !== 'blobs' && epoch > 150) { txt = 'Stuck: with no activation function, the network can only draw one straight line. ' + (data === 'xor' ? 'XOR needs a bend.' : 'A circle needs a bend.') + ' Choose Tanh or ReLU.'; cls = 'bad'; }
+    else if (H < 3 && data !== 'blobs' && epoch > 300) { txt = 'Too few neurons: this pattern needs more than ' + H + ' hidden neuron' + (H > 1 ? 's' : '') + ' to bend the line enough. Add some.'; cls = 'warn'; }
+    else if (lr > .8 && epoch > 100 && accV < .9) { txt = 'The learning speed is high, so each nudge may overshoot. Try a smaller speed.'; cls = 'warn'; }
+    else { txt = 'Learning... ' + Math.round(accV * 100) + '% correct so far. Each round, every weight is nudged a little to reduce the error.'; }
+    m.textContent = txt; m.className = 'msg ' + cls;
+  }
+
+  function reset() { makeData(); init(); }
+  function seg(id, fn) { $(id).querySelectorAll('button').forEach(b => b.addEventListener('click', () => { $(id).querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); fn(b.dataset.v); })); }
+  seg('segData', v => { data = v; reset(); });
+  seg('segAct', v => { act = v; init(); });
+  $('hid').oninput = e => { H = +e.target.value; $('hidV').textContent = H; init(); };
+  $('lr').oninput = e => { lr = +e.target.value; $('lrV').textContent = lr.toFixed(2); };
+  $('reset').onclick = () => { init(); running = true; $('train').textContent = 'Pause'; };
+  $('train').onclick = () => { running = !running; $('train').textContent = running ? 'Pause' : 'Keep training'; };
+
+  let tick = 0;
+  function loop() {
+    if (running) for (let i = 0; i < 8; i++) trainStep();
+    if (tick++ % 2 === 0) {
+      drawMap(); drawNet(); message();
+      $('ep').textContent = epoch; $('loss').textContent = epoch ? lossV.toFixed(2) : '-'; $('acc').textContent = epoch ? Math.round(accV * 100) + '%' : '-';
+    }
+    requestAnimationFrame(loop);
+  }
+  reset(); loop();
+  window.__nn = { setAct: v => { act = v; init(); }, setH: v => { H = v; init(); }, setData: v => { data = v; reset(); }, state: () => ({ epoch, accV, lossV, H, act, data }) };
+})();
+</script></body></html>

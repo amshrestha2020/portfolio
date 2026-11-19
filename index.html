@@ -23,7 +23,6 @@
       <a href="#about">About</a>
       <a href="#artifact">Artifact 1</a>
       <a href="#artifact2">Artifact 2</a>
-      <a href="#artifact3">Artifact 3</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#journey">Education</a>
@@ -43,7 +42,7 @@
       <div class="container hero-grid">
         <div class="hero-text reveal">
           <span class="badge"><i class="dot"></i> Open to opportunities</span>
-          <h1>Hi, I'm <span class="gradient-text">Ashesh Shrestha</span>.<br /><span id="prefix">I build </span><span class="typed-wrap"><span id="typed"></span><span class="cursor">|</span></span></h1>
+          <h1>Hi, I'm <span class="gradient-text">Ashesh Shrestha</span>.<br />I build <span class="typed-wrap"><span id="typed"></span><span class="cursor">|</span></span></h1>
           <p class="lead">
             Software Engineer with 5+ years building microservices, backend systems and cloud infrastructure
             for financial services platforms, now pairing that engineering depth with an MSc in Artificial Intelligence.
@@ -77,14 +76,6 @@
         </div>
       </div>
     </section>
-
-    <!-- SERVICES TICKER -->
-    <div class="ticker" aria-label="Services I offer">
-      <button type="button" class="ticker-btn" id="tickerBtn" aria-pressed="false" aria-label="Pause scrolling services">⏸</button>
-      <div class="ticker-view">
-        <ul class="ticker-track" id="tickerTrack"><li>Microservices &amp; REST APIs</li><li>Backend development (Java, Spring Boot, Python, Node.js)</li><li>Cloud-native systems (AWS, Docker, Kubernetes)</li><li>Financial services platforms</li><li>Applied AI solutions</li><li>LLM apps &amp; prompt design</li><li>Responsible AI &amp; AI governance</li><li>CI/CD with GitHub Actions</li><li>Data analytics</li><li>Computer vision</li></ul>
-      </div>
-    </div>
 
     <!-- ABOUT -->
     <section class="section" id="about">
@@ -250,7 +241,7 @@
             <div class="chips">
               <span>Consensus</span><span>NotebookLM</span><span>Flight simulator</span>
             </div>
-            <p>I used Consensus to find research-backed answers, NotebookLM to work from my own source documents, and a flight simulator to practice using AI in a safe setting. I then built my own flight simulator, a helicopter rotor lab and a chopper airflow trainer (below).</p>
+            <p>I used Consensus to find research-backed answers, NotebookLM to work from my own source documents, and a flight simulator to practice using AI in a safe setting. I then built my own flight simulator, a helicopter rotor lab and a prompt simulator (below).</p>
           </article>
           <article class="card reveal">
             <div class="ico">📊</div>
@@ -331,6 +322,34 @@
           <iframe title="Chopper Rotor and Airflow Trainer" loading="lazy" data-src="chopper-trainer/index.html"></iframe>
         </div>
 
+        <article class="project reveal sim">
+          <span class="tag">Interactive · For children</span>
+          <h3>Sky Play (kids version)</h3>
+          <p>A very simple version for children: fly a plane and collect stars, then change a helicopter's blades and watch the lift, noise and fuel. One small file, easy to read.</p>
+          <div class="links">
+            <button type="button" class="link link-btn embed-toggle" data-embed="kidsEmbed" aria-expanded="false" aria-controls="kidsEmbed">Play it here ▶</button>
+            <a href="kids/index.html" class="link" target="_blank" rel="noopener">Open full screen →</a>
+            <a href="https://github.com/amshrestha2020/portfolio/tree/main/kids" class="link" target="_blank" rel="noopener">View source →</a>
+          </div>
+        </article>
+        <div class="sim-embed" id="kidsEmbed" hidden>
+          <iframe title="Sky Play for kids" loading="lazy" data-src="kids/index.html"></iframe>
+        </div>
+
+        <article class="project reveal sim">
+          <span class="tag">Interactive · AI practice</span>
+          <h3>Prompt Flight Simulator</h3>
+          <p>A practice cockpit for writing AI prompts. Five missions give instant feedback on context, task, constraints, format, key details and honesty guardrails (my AI Lab method).</p>
+          <div class="links">
+            <button type="button" class="link link-btn embed-toggle" data-embed="promptEmbed" aria-expanded="false" aria-controls="promptEmbed">Play it here ▶</button>
+            <a href="prompt-simulator/index.html" class="link" target="_blank" rel="noopener">Open full screen →</a>
+            <a href="https://github.com/amshrestha2020/portfolio/tree/main/prompt-simulator" class="link" target="_blank" rel="noopener">View source →</a>
+          </div>
+        </article>
+        <div class="sim-embed" id="promptEmbed" hidden>
+          <iframe title="Prompt Flight Simulator" loading="lazy" data-src="prompt-simulator/index.html"></iframe>
+        </div>
+
         <div class="callout reveal">
           <h4>Why this matters to you</h4>
           <p>
@@ -338,70 +357,6 @@
             This artifact shows how I learn: I study the concepts, test the tools myself, and turn what I
             learn into something a leadership team can use.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARTIFACT 3 -->
-    <section class="section alt" id="artifact3">
-      <div class="container">
-        <p class="eyebrow reveal">Portfolio Artifact 3</p>
-        <h2 class="reveal">What I learned: <span class="gradient-text">neural networks, clear communication and faith-driven adaptability</span></h2>
-        <p class="muted reveal">A record of Workshop 3: how deep learning works, how large language models are trained, how to explain hard ideas simply, and how faith shapes the way I lead through change.</p>
-
-        <div class="meta-grid reveal">
-          <div><small>Audience</small><strong>Hiring managers, recruiters and engineering leads who want AI skills explained clearly</strong></div>
-          <div><small>Purpose</small><strong>Show I understand deep learning and can explain it to non-experts, and that I lead change with humility</strong></div>
-          <div><small>Format</small><strong>Learning summary plus an interactive neural network demo</strong></div>
-          <div><small>Source</small><strong>Workshop 3</strong></div>
-        </div>
-
-        <div class="learn-grid">
-          <article class="card reveal">
-            <div class="ico">🧠</div>
-            <h4>1. Deep learning and neural networks</h4>
-            <p>Artificial neural networks learn by adjusting weights to reduce error. Convolutional networks (CNNs) find patterns in images, recurrent networks (RNNs) handle sequences such as text, and generative adversarial networks (GANs) pit two networks against each other to create new data. Activation functions let a network learn curved, not just straight, patterns. Synthetic data such as deepfakes raises real ethical questions about trust and consent.</p>
-            <div class="chips"><span>ANN</span><span>CNN</span><span>RNN</span><span>GAN</span><span>Activation functions</span></div>
-          </article>
-          <article class="card reveal">
-            <div class="ico">🎓</div>
-            <h4>2. How language models are trained</h4>
-            <p>In a guided exercise with an AI tutor ("Professor Predict"), I explored how large language models learn. Pretraining teaches a model to predict the next token. Post-training makes it follow instructions. Neither is a guaranteed fact-checker, so fluent answers can still be wrong (hallucination). Search, calculators, supplied documents and human review cover the gaps. My rule: use a model for drafting, explaining and brainstorming, and verify anything live, exact, private or high-stakes.</p>
-            <div class="chips"><span>Pretraining</span><span>Post-training</span><span>Hallucination</span><span>Tools and verification</span></div>
-          </article>
-          <article class="card reveal">
-            <div class="ico">💬</div>
-            <h4>3. Communication in change leadership</h4>
-            <p>Change sticks when people understand it. I practiced clear, consistent messages, two-way feedback, storytelling and chunking complex ideas into small pieces with visuals and hands-on practice. I applied these to the Einstein challenge: explain neural networks simply (below).</p>
-            <div class="chips"><span>Clear messaging</span><span>Feedback loops</span><span>Storytelling</span><span>Visual aids</span></div>
-          </article>
-          <article class="card reveal">
-            <div class="ico">🧭</div>
-            <h4>4. Faith and adaptive leadership</h4>
-            <p>Three leaders gave me a pattern for hard seasons. <b>Moses</b> accepted advice and shared the load by delegating. <b>Nehemiah</b> prayed first, then planned, and adjusted when opposition came. <b>Esther</b> prepared carefully, picked her moment and took a risk for others. My takeaway: adapt with humility, ask for help early, and make decisions for the good of the people I serve.</p>
-            <div class="chips"><span>Delegation</span><span>Prayer and planning</span><span>Courage with timing</span></div>
-          </article>
-        </div>
-
-        <article class="project featured reveal sim">
-          <span class="tag">Interactive · Neural networks explained simply</span>
-          <h3>Neural Network Playground</h3>
-          <p><b>The Einstein challenge:</b> if you cannot explain it simply, you do not understand it well enough. <b>My simple explanation:</b> a neural network is a team of very simple decision-makers in layers. Each weighs its inputs, decides how loudly to speak up, and passes the result on. At first the team guesses badly. After each guess we tell it how wrong it was, and every member nudges its weights a little. After thousands of nudges, the team gets good. That is learning: practice with feedback.<br />
-             <b>Try it:</b> train a tiny network to separate orange dots from blue ones. Remove the activation function and watch it fail on the XOR pattern, because without a bend it can only draw one straight line. Add neurons and watch it succeed.</p>
-          <div class="stack"><span>JavaScript</span><span>Canvas</span><span>Gradient descent</span><span>Built with Claude</span></div>
-          <div class="links">
-            <button type="button" class="link link-btn embed-toggle" data-embed="nnEmbed" aria-expanded="false" aria-controls="nnEmbed">Play it here ▶</button>
-            <a href="neural-network-lab/index.html" class="link" target="_blank" rel="noopener">Open full screen →</a>
-            <a href="https://github.com/amshrestha2020/portfolio/tree/main/neural-network-lab" class="link" target="_blank" rel="noopener">View source →</a>
-          </div>
-        </article>
-        <div class="sim-embed" id="nnEmbed" hidden>
-          <iframe title="Neural Network Playground" loading="lazy" data-src="neural-network-lab/index.html"></iframe>
-        </div>
-
-        <div class="callout reveal">
-          <h4>Reflection</h4>
-          <p>Workshop 3 connected the technical and the personal. Training a network and leading a team have something in common: both improve through honest feedback and small, repeated adjustments. For this artifact I chose to explain neural networks plainly and show them working, because my audience, hiring managers and technical leads, values people who can make complex ideas clear. I also learned to treat AI answers as a starting point that needs checking, which matches the humility I want to bring to leadership.</p>
         </div>
       </div>
     </section>

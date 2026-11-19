@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Flight Simulator | Ashesh Shrestha</title>
+  <meta name="description" content="A safe cockpit to practice writing AI prompts. Five missions, instant feedback on context, task, constraints, format and guardrails." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="back" href="../index.html#artifact2" target="_top">← Back to portfolio</a>
+    <span class="brand">Prompt Flight Simulator</span>
+  </header>
+
+  <main class="wrap">
+    <!-- INTRO -->
+    <section id="intro" class="panel center">
+      <p class="eyebrow">Portfolio Artifact 2 · Practice sandbox</p>
+      <h1>Prompt <span class="glow-text">Flight Simulator</span></h1>
+      <p class="lead">Pilots rehearse in simulators before they fly. Rehearse your AI prompts the same way: five missions, instant feedback, zero risk. Each prompt is checked against the <b>Context · Task · Constraints</b> method.</p>
+      <ul class="legend">
+        <li><b>Context</b> who you are and the situation</li>
+        <li><b>Task</b> the one thing you want done</li>
+        <li><b>Constraints</b> limits such as length, time or count</li>
+        <li><b>Format + guardrails</b> how to answer, and what to do when unsure</li>
+      </ul>
+      <button id="startBtn" class="btn">Start training →</button>
+      <p class="hint">Runs entirely in your browser. Nothing you type is sent anywhere or saved.</p>
+    </section>
+
+    <!-- MISSION -->
+    <section id="game" hidden>
+      <article class="panel">
+        <div class="leg"><span id="legLabel"></span><span id="tag" class="tag"></span></div>
+        <h2 id="title"></h2>
+        <p id="brief" class="brief"></p>
+        <p class="goal"><b>Your goal:</b> <span id="goal"></span></p>
+        <label for="prompt" class="lbl">Write your prompt</label>
+        <textarea id="prompt" rows="6" placeholder="Type the prompt you would send to an AI assistant..." spellcheck="true"></textarea>
+        <div class="row"><span id="count" class="count">0 words</span><button id="checkBtn" class="btn" type="button">Check my prompt</button></div>
+
+        <div id="result" class="result" hidden aria-live="polite">
+          <div class="score-row">
+            <div class="score"><strong id="score">0</strong><span>/100</span></div>
+            <div><p id="grade" class="grade"></p><p id="gradeText" class="muted"></p></div>
+          </div>
+          <ul id="checks" class="checks"></ul>
+          <details class="sample"><summary>Show a strong sample prompt</summary><p id="sample"></p></details>
+          <div class="row end">
+            <button id="retryBtn" class="btn btn-ghost" type="button">Edit and re-check</button>
+            <button id="nextBtn" class="btn" type="button">Next mission →</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- END -->
+    <section id="end" class="panel" hidden>
+      <p class="eyebrow">Training complete</p>
+      <h2 id="endTitle"></h2>
+      <p id="endText" class="lead"></p>
+      <h3>Your best score per mission</h3>
+      <ol id="log" class="log"></ol>
+      <h3>Remember</h3>
+      <ul class="take">
+        <li><b>The same prompt can give different answers.</b> Language models are non-deterministic, so precise constraints help, but you still review every output.</li>
+        <li><b>Give context, a clear task and limits.</b> Vague prompts get generic results.</li>
+        <li><b>Ask for honesty.</b> Tell the AI to say when it is unsure and to flag claims that need checking against real sources.</li>
+      </ul>
+      <p class="note">These checks are simple rules, not an AI model. They teach structure, not quality of ideas.</p>
+      <div class="actions">
+        <button id="againBtn" class="btn">Train again</button>
+        <a class="btn btn-ghost" href="../index.html#artifact2" target="_top">Back to portfolio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">Built by Ashesh Shrestha · Missions are fictional and for learning.</footer>
+  <script src="app.js"></script>
+</body>
+</html>
