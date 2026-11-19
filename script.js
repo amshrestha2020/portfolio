@@ -19,19 +19,46 @@ navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => na
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 10), { passive: true });
 
-// Typing effect (edit these phrases)
-const phrases = ["scalable microservices.", "cloud-native systems.", "reliable finance platforms.", "applied AI solutions."];
+// Typing effect: a few rounds, then the message settles
+const phrases = ["scalable microservices.", "cloud-native systems.", "reliable finance platforms."];
+const FINAL = "What is your need?";
 const typed = document.getElementById("typed");
-let p = 0, c = 0, deleting = false;
+const cursor = document.querySelector(".cursor");
+const prefix = document.getElementById("prefix");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let p = 0, c = 0, deleting = false, settling = false;
+function settle() { prefix.textContent = ""; typed.textContent = FINAL; cursor.classList.add("done"); }
 function type() {
-  const word = phrases[p];
+  const word = settling ? FINAL : phrases[p];
   typed.textContent = word.slice(0, c);
-  if (!deleting && c === word.length) { deleting = true; return setTimeout(type, 1600); }
-  if (deleting && c === 0) { deleting = false; p = (p + 1) % phrases.length; }
+  if (settling) {
+    if (c === word.length) return setTimeout(() => cursor.classList.add("done"), 1200);
+    c++; return setTimeout(type, 70);
+  }
+  if (!deleting && c === word.length) { deleting = true; return setTimeout(type, 1400); }
+  if (deleting && c === 0) {
+    deleting = false; p++;
+    if (p === phrases.length) { settling = true; prefix.textContent = ""; return setTimeout(type, 400); }
+  }
   c += deleting ? -1 : 1;
   setTimeout(type, deleting ? 40 : 80);
 }
-type();
+if (reduceMotion) settle(); else type();
+
+// Services ticker: duplicate items for a seamless loop, pause button
+(() => {
+  const track = document.getElementById("tickerTrack"), btn = document.getElementById("tickerBtn");
+  if (!track) return;
+  if (!reduceMotion) {
+    [...track.children].forEach(li => { const d = li.cloneNode(true); d.setAttribute("aria-hidden", "true"); track.appendChild(d); });
+  }
+  btn.addEventListener("click", () => {
+    const paused = btn.closest(".ticker").classList.toggle("paused");
+    btn.setAttribute("aria-pressed", String(paused));
+    btn.textContent = paused ? "▶" : "⏸";
+    btn.setAttribute("aria-label", paused ? "Play scrolling services" : "Pause scrolling services");
+  });
+})();
 
 // Scroll reveal + skill bars + counters
 const countUp = el => {
